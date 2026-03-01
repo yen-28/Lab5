@@ -1,10 +1,11 @@
 package ru.itmo.zhmeh.things;
 
 import java.time.Instant;
+import java.util.Objects;
 
 public final class Instrument {
     // Уникальный номер прибора. Программа назначает сама.
-    public long id;
+    public final long id;
     // Название прибора (чтобы человек понял, что это). Нельзя пустое. До 128 символов.
     public String name;
     // Тип прибора (например PH_METER, BALANCE). Выбирается из списка InstrumentType.
@@ -18,7 +19,117 @@ public final class Instrument {
     // Кто добавил запись (логин). На ранних этапах можно "SYSTEM".
     public String ownerUsername;
     // Когда создано. Программа ставит автоматически.
-    public Instant createdAt;
+    public final Instant createdAt;
     // Когда обновляли. Программа обновляет автоматически.
     public Instant updatedAt;
+
+    public Instrument(long id, Instant createdAt, Instant updatedAt, String ownerUsername, String name, InstrumentType type, String inventoryNumber, String location, InstrumentStatus status) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.ownerUsername = ownerUsername;
+        this.name = name;
+        this.type = type;
+        this.inventoryNumber = inventoryNumber;
+        this.location = location;
+        this.status = status;
+    }
+
+    public Instrument(long id, Instant createdAt) {
+        this.id = id;
+        this.createdAt = createdAt;
+    }
+// getters
+
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public InstrumentType getType() {
+        return type;
+    }
+
+    public String getInventoryNumber() {
+        return inventoryNumber;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public InstrumentStatus getStatus() {
+        return status;
+    }
+
+    public String getOwnerUsername() {
+        return ownerUsername;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+// setters
+
+    public void setType(InstrumentType type) {
+        this.type = type;
+    }
+
+    public void setInventoryNumber(String inventoryNumber) {
+        this.inventoryNumber = inventoryNumber;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setStatus(InstrumentStatus status) {
+        this.status = status;
+    }
+
+    public void setOwnerUsername(String ownerUsername) {
+        this.ownerUsername = ownerUsername;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Instrument that)) return false;
+        return id == that.id && Objects.equals(name, that.name) && type == that.type && Objects.equals(inventoryNumber, that.inventoryNumber) && Objects.equals(location, that.location) && status == that.status && Objects.equals(ownerUsername, that.ownerUsername) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, type, inventoryNumber, location, status, ownerUsername, createdAt, updatedAt);
+    }
+
+    @Override
+    public String toString() {
+        return "Instrument{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", inventoryNumber='" + inventoryNumber + '\'' +
+                ", location='" + location + '\'' +
+                ", status=" + status +
+                ", ownerUsername='" + ownerUsername + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }
