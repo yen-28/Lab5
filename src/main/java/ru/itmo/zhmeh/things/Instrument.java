@@ -1,5 +1,7 @@
 package ru.itmo.zhmeh.things;
 
+import ru.itmo.zhmeh.service.Validator;
+
 import java.time.Instant;
 import java.util.Objects;
 
@@ -23,10 +25,15 @@ public final class Instrument {
     // Когда обновляли. Программа обновляет автоматически.
     private Instant updatedAt;
 
-    public Instrument(long id, Instant createdAt, Instant updatedAt, String ownerUsername, String name, InstrumentType type, String inventoryNumber, String location, InstrumentStatus status) {
-        this.id = id;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+
+    private void touch(){
+        setUpdatedAt(Instant.now());
+        setOwnerUsername("SYSTEM"); // ВРЕМЕННО НА РАННИХ ЭТАПАХ
+    }
+    public Instrument(long id, String ownerUsername, String name, InstrumentType type, String inventoryNumber, String location, InstrumentStatus status) {
+        this.id = id; // айди метод!!
+        this.createdAt = Instant.now();
+        this.updatedAt = Instant.now();
         this.setOwnerUsername(ownerUsername);
         this.setName(name);
         this.setType(type);
@@ -35,9 +42,10 @@ public final class Instrument {
         this.status = status;
     }
 
-    public Instrument(long id, Instant createdAt) {
-        this.id = id;
-        this.createdAt = createdAt;
+    public Instrument(long id) {
+        this.id = id; // айди метод!!
+        this.createdAt = Instant.now();
+        this.updatedAt = Instant.now();
     }
 // getters
 
@@ -81,22 +89,29 @@ public final class Instrument {
 
     public void setType(InstrumentType type) {
         this.type = type;
+        touch();
     }
 
     public void setInventoryNumber(String inventoryNumber) {
+        Validator.validateInventoryNumber(inventoryNumber);
         this.inventoryNumber = inventoryNumber;
+        touch();
     }
 
     public void setLocation(String location) {
+        Validator.validateLocation(location);
         this.location = location;
+        touch();
     }
 
     public void setStatus(InstrumentStatus status) {
         this.status = status;
+        touch();
     }
 
     public void setOwnerUsername(String ownerUsername) {
         this.ownerUsername = ownerUsername;
+        touch();
     }
 
     public void setUpdatedAt(Instant updatedAt) {
@@ -104,20 +119,22 @@ public final class Instrument {
     }
 
     public void setName(String name) {
-        if (!(name == null) & !(name.isEmpty()) & name.length() <= 128 ) {
-            this.name = name;
-        } else throw new IllegalArgumentException("Invalid name: " + name);
+        Validator.validateName(name);
+        this.name = name;
+        touch();
     }
+
+
 
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Instrument that)) return false;
-        return id == that.id && Objects.equals(name, that.name) && type == that.type && Objects.equals(inventoryNumber, that.inventoryNumber) && Objects.equals(location, that.location) && status == that.status && Objects.equals(ownerUsername, that.ownerUsername) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, type, inventoryNumber, location, status, ownerUsername, createdAt, updatedAt);
+        return Objects.hash(id);
     }
 
     @Override
