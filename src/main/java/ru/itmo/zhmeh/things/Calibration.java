@@ -1,13 +1,14 @@
 package ru.itmo.zhmeh.things;
 
 import java.time.Instant;
+import java.util.Objects;
 
 public final class Calibration {
     // Уникальный номер калибровки. Программа назначает сама.
     private final long id;
     // Какому прибору принадлежит (id прибора).
 // Должен ссылаться на реально существующий Instrument.
-    private long instrumentId;
+    private final long instrumentId;
     // Тип калибровки (например ONE_POINT, TWO_POINT). Выбирается из списка CalibrationType.
     private final CalibrationType type;
     // Результат: OK или FAIL.
@@ -21,10 +22,11 @@ public final class Calibration {
     // Когда запись создана. Программа ставит автоматически.
     private final Instant createdAt;
 
-    public Calibration(long id, CalibrationType type, Instant createdAt) {
+    public Calibration(long id, CalibrationType type, Instant createdAt, long instrumentId) {
         this.id = id;
         this.type = type;
         this.createdAt = createdAt;
+        this.instrumentId = instrumentId;
     }
 
     public Calibration(long id, CalibrationType type, long instrumentId, CalibrationResult result, String comment, Instant calibratedAt, String ownerUsername, Instant createdAt) {
@@ -38,6 +40,7 @@ public final class Calibration {
         this.createdAt = createdAt;
     }
 
+// getters
 
     public long getId() {
         return id;
@@ -71,10 +74,7 @@ public final class Calibration {
         return createdAt;
     }
 
-
-    public void setInstrumentId(long instrumentId) { // ??????/
-        this.instrumentId = instrumentId;
-    }
+// setters
 
     public void setResult(CalibrationResult result) {
         this.result = result;
@@ -90,5 +90,16 @@ public final class Calibration {
 
     public void setOwnerUsername(String ownerUsername) {
         this.ownerUsername = ownerUsername;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Calibration that)) return false;
+        return id == that.id && instrumentId == that.instrumentId && type == that.type && result == that.result && Objects.equals(calibratedAt, that.calibratedAt) && Objects.equals(ownerUsername, that.ownerUsername) && Objects.equals(createdAt, that.createdAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, instrumentId, type, result, calibratedAt, ownerUsername, createdAt);
     }
 }
