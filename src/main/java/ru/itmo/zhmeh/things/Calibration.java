@@ -23,21 +23,21 @@ public final class Calibration {
     private final Instant createdAt;
 
     public Calibration(long id, CalibrationType type, Instant createdAt, long instrumentId) {
-        this.id = id;
+        this.id = id; //сделать
         this.type = type;
-        this.createdAt = createdAt;
-        this.instrumentId = instrumentId;
+        this.createdAt = Instant.now();
+        this.instrumentId = instrumentId; //
     }
 
-    public Calibration(long id, CalibrationType type, long instrumentId, CalibrationResult result, String comment, Instant calibratedAt, String ownerUsername, Instant createdAt) {
-        this.id = id;
+    public Calibration(long id, CalibrationType type, long instrumentId, CalibrationResult result, String comment, Instant calibratedAt, String ownerUsername) {
+        this.id = id; // сделать
         this.type = type;
         this.instrumentId = instrumentId;
         this.result = result;
         this.comment = comment;
         this.calibratedAt = calibratedAt;
         this.ownerUsername = ownerUsername;
-        this.createdAt = createdAt;
+        this.createdAt = Instant.now();
     }
 
 // getters
@@ -95,11 +95,11 @@ public final class Calibration {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Calibration that)) return false;
-        return id == that.id && instrumentId == that.instrumentId && type == that.type && result == that.result && Objects.equals(calibratedAt, that.calibratedAt) && Objects.equals(ownerUsername, that.ownerUsername) && Objects.equals(createdAt, that.createdAt);
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, instrumentId, type, result, calibratedAt, ownerUsername, createdAt);
+        return Objects.hash(id);
     }
 }

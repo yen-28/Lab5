@@ -1,6 +1,7 @@
 package ru.itmo.zhmeh.service;
 
 public final class Validator {
+    // для инструмента
     public static void validateName(String name){
         if ( name == null || name.isEmpty()){
             throw new IllegalArgumentException("Ошибка: имя не может быть пустым");
@@ -23,6 +24,7 @@ public final class Validator {
         }
     }
 
+    // для калибратора
 
 
 
