@@ -27,9 +27,9 @@ public final class Instrument {
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.ownerUsername = ownerUsername;
-        this.name = name;
-        this.type = type;
+        this.setOwnerUsername(ownerUsername);
+        this.setName(name);
+        this.setType(type);
         this.inventoryNumber = inventoryNumber;
         this.location = location;
         this.status = status;
@@ -104,7 +104,9 @@ public final class Instrument {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (!(name == null) & !(name.isEmpty()) & name.length() <= 128 ) {
+            this.name = name;
+        } else throw new IllegalArgumentException("Invalid name: " + name);
     }
 
     @Override
