@@ -6,23 +6,23 @@ import java.time.Instant;
 import java.util.Objects;
 
 public final class Instrument {
-    // Уникальный номер прибора. Программа назначает сама.
+    // Уникальный номер прибора. Программа назначает сама. -
     private final long id;
-    // Название прибора (чтобы человек понял, что это). Нельзя пустое. До 128 символов.
+    // Название прибора (чтобы человек понял, что это). Нельзя пустое. До 128 символов. +
     private String name;
-    // Тип прибора (например PH_METER, BALANCE). Выбирается из списка InstrumentType.
+    // Тип прибора (например PH_METER, BALANCE). Выбирается из списка InstrumentType. -
     private InstrumentType type;
-    // Инвентарный номер (например "INV-00077"). Можно пусто. До 32 символов.
+    // Инвентарный номер (например "INV-00077"). Можно пусто. До 32 символов. +
     private String inventoryNumber;
-    // Где находится (например "Lab-2 bench"). Нельзя пустое. До 64 символов.
+    // Где находится (например "Lab-2 bench"). Нельзя пустое. До 64 символов. +
     private String location;
-    // Статус прибора: ACTIVE или OUT_OF_SERVICE.
+    // Статус прибора: ACTIVE или OUT_OF_SERVICE. -
     private InstrumentStatus status;
-    // Кто добавил запись (логин). На ранних этапах можно "SYSTEM".
+    // Кто добавил запись (логин). На ранних этапах можно "SYSTEM". +-
     private String ownerUsername;
-    // Когда создано. Программа ставит автоматически.
+    // Когда создано. Программа ставит автоматически. +
     private final Instant createdAt;
-    // Когда обновляли. Программа обновляет автоматически.
+    // Когда обновляли. Программа обновляет автоматически. +
     private Instant updatedAt;
 
 
