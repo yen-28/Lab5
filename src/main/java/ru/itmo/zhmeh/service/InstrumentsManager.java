@@ -52,7 +52,7 @@ public class InstrumentsManager {
     }
 
     public void list() {
-        System.out.println(getInstruments());
+        System.out.println(getInstruments()); //возможно стоит сделать красивее
     }
 
 
