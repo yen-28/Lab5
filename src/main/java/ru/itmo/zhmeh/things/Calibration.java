@@ -28,17 +28,18 @@ public final class Calibration {
         this.id = id; //сделать
         this.type = type;
         this.createdAt = Instant.now();
-        this.instrumentId = instrumentId; //
+        this.instrumentId = instrumentId;// ??
+        this.calibratedAt = Instant.now();
     }
 
     public Calibration(long id, CalibrationType type, long instrumentId, CalibrationResult result, String comment, Instant calibratedAt, String ownerUsername) {
         this.id = id; // сделать
         this.type = type;
-        this.instrumentId = instrumentId;
-        this.result = result;
-        this.comment = comment;
-        this.calibratedAt = calibratedAt;
-        this.setOwnerUsername();
+        this.instrumentId = instrumentId; //СДЕЛАТЬ
+        this.result = result; //?? СПРОСИТЬ ЧТО ЗНАЧИТ РЕЗУЛЬТАТ
+        this.setComment(comment);
+        this.setCalibratedAt(calibratedAt);
+        this.setOwnerUsername(); //!! временно
         this.createdAt = Instant.now();
     }
 
@@ -88,7 +89,9 @@ public final class Calibration {
     }
 
     public void setCalibratedAt(Instant calibratedAt) {
-        this.calibratedAt = calibratedAt;
+        if (calibratedAt != null) { //Возможно не налл недостаточно
+            this.calibratedAt = calibratedAt;
+        } else this.calibratedAt = Instant.now();
     }
 
     public void setOwnerUsername() {
