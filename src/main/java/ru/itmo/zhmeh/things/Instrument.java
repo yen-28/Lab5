@@ -38,8 +38,8 @@ public final class Instrument {
         this.setName(name);
         this.setType(type);
         this.inventoryNumber = inventoryNumber;
-        this.location = location;
-        this.status = status;
+        this.setLocation(location);
+        this.setStatus(status);
     }
 
     public Instrument(long id) {
@@ -111,7 +111,6 @@ public final class Instrument {
 
     public void setOwnerUsername(String ownerUsername) {
         this.ownerUsername = ownerUsername;
-        touch();
     }
 
     public void setUpdatedAt(Instant updatedAt) {

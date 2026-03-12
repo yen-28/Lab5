@@ -15,7 +15,7 @@ public class InstrumentsManager {
     private long nextId = 1;
 
 
-    public long generateId() {
+    private long generateId() {
         return nextId++;
     }
     /*
@@ -51,5 +51,11 @@ public class InstrumentsManager {
         return inst;
     }
 
+    public void list() {
+        System.out.println(getInstruments());
+    }
 
+    public Map<Long, Instrument> getInstruments() {
+        return instruments;
+    }
 }
