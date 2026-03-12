@@ -33,7 +33,7 @@ public class InstrumentsManager {
                 .filter(Objects::nonNull) //отбросили налл
                 .anyMatch(number::equals); //проверка на принадлежность
         if (exist) {
-            throw new IllegalArgumentException("Инвентарный номер: " + number + " занят");
+            throw new IllegalArgumentException("Ошибка: инвентарный номер: " + number + " занят");
         }
     }
     public void addInstrument(String ownerUsername, String name, InstrumentType type, String inventoryNumber, String location, InstrumentStatus status){
@@ -41,6 +41,14 @@ public class InstrumentsManager {
         long id = generateId();
         Instrument instrument = new Instrument(id, ownerUsername, name, type, inventoryNumber, location, status);
         instruments.put(id, instrument);
+    }
+
+    public Instrument getById(long id){
+        Instrument inst = instruments.get(id);
+        if (inst == null){
+            throw new IllegalArgumentException("Ошибка: прибор с id: " + id + " не найден");
+        }
+        return inst;
     }
 
 
