@@ -26,6 +26,12 @@ public final class Validator {
 
     // для калибратора
 
+    public static void validateComment(String inventoryNumber){
+        if (inventoryNumber.length() > 128){
+            throw new IllegalArgumentException("Ошибка: длина более 128 символов");
+        }
+    }
+
 
 
 }

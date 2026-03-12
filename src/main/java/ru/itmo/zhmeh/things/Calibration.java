@@ -1,5 +1,7 @@
 package ru.itmo.zhmeh.things;
 
+import ru.itmo.zhmeh.service.Validator;
+
 import java.time.Instant;
 import java.util.Objects;
 
@@ -9,13 +11,13 @@ public final class Calibration {
     // Какому прибору принадлежит (id прибора).
 // Должен ссылаться на реально существующий Instrument.
     private final long instrumentId;
-    // Тип калибровки (например ONE_POINT, TWO_POINT). Выбирается из списка CalibrationType.
+    // Тип калибровки (например ONE_POINT, TWO_POINT). Выбирается из списка CalibrationType. -
     private final CalibrationType type;
-    // Результат: OK или FAIL.
+    // Результат: OK или FAIL. -
     private CalibrationResult result;
-    // Комментарий (например "buffers 4.00 and 7.00"). Можно пусто. До 128 символов.
+    // Комментарий (например "buffers 4.00 and 7.00"). Можно пусто. До 128 символов. +
     private String comment;
-    // Когда делали калибровку. Если не вводят — текущее время.
+    // Когда делали калибровку. Если не вводят — текущее время. -
     private Instant calibratedAt;
     // Кто делал (логин). На ранних этапах можно "SYSTEM".
     private String ownerUsername;
@@ -36,7 +38,7 @@ public final class Calibration {
         this.result = result;
         this.comment = comment;
         this.calibratedAt = calibratedAt;
-        this.ownerUsername = ownerUsername;
+        this.setOwnerUsername();
         this.createdAt = Instant.now();
     }
 
@@ -81,6 +83,7 @@ public final class Calibration {
     }
 
     public void setComment(String comment) {
+        Validator.validateComment(comment);
         this.comment = comment;
     }
 
@@ -88,8 +91,8 @@ public final class Calibration {
         this.calibratedAt = calibratedAt;
     }
 
-    public void setOwnerUsername(String ownerUsername) {
-        this.ownerUsername = ownerUsername;
+    public void setOwnerUsername() {
+        this.ownerUsername = "SYSTEM"; //временно
     }
 
     @Override
