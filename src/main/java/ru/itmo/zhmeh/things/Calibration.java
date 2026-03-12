@@ -1,6 +1,6 @@
 package ru.itmo.zhmeh.things;
 
-import ru.itmo.zhmeh.service.Validator;
+import ru.itmo.zhmeh.validation.FieldValidator;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -84,7 +84,7 @@ public final class Calibration {
     }
 
     public void setComment(String comment) {
-        Validator.validateComment(comment);
+        FieldValidator.validateComment(comment);
         this.comment = comment;
     }
 

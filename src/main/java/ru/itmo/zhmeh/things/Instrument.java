@@ -1,6 +1,6 @@
 package ru.itmo.zhmeh.things;
 
-import ru.itmo.zhmeh.service.Validator;
+import ru.itmo.zhmeh.validation.FieldValidator;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -93,13 +93,13 @@ public final class Instrument {
     }
 
     public void setInventoryNumber(String inventoryNumber) {
-        Validator.validateInventoryNumber(inventoryNumber);
+        FieldValidator.validateInventoryNumber(inventoryNumber);
         this.inventoryNumber = inventoryNumber;
         touch();
     }
 
     public void setLocation(String location) {
-        Validator.validateLocation(location);
+        FieldValidator.validateLocation(location);
         this.location = location;
         touch();
     }
@@ -119,7 +119,7 @@ public final class Instrument {
     }
 
     public void setName(String name) {
-        Validator.validateName(name);
+        FieldValidator.validateName(name);
         this.name = name;
         touch();
     }

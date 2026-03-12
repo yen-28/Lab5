@@ -1,6 +1,6 @@
-package ru.itmo.zhmeh.service;
+package ru.itmo.zhmeh.validation;
 
-public final class Validator {
+public final class FieldValidator {
     // для инструмента
     public static void validateName(String name){
         if ( name == null || name.isEmpty()){

@@ -1,6 +1,6 @@
 package ru.itmo.zhmeh.things;
 
-import ru.itmo.zhmeh.service.Validator;
+import ru.itmo.zhmeh.validation.FieldValidator;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -75,7 +75,7 @@ public final class Maintenance {
     }
 
     public void setDetails(String details) {
-        Validator.validateDetails(details);
+        FieldValidator.validateDetails(details);
         this.details = details;
     }
 
