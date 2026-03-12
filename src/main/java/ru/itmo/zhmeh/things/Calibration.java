@@ -91,7 +91,8 @@ public final class Calibration {
     public void setCalibratedAt(Instant calibratedAt) {
         if (calibratedAt != null) { //Возможно не налл недостаточно
             this.calibratedAt = calibratedAt;
-        } else this.calibratedAt = Instant.now();
+        } else { this.calibratedAt = Instant.now();
+        System.out.println("Время выставлено по умолчанию");}
     }
 
     public void setOwnerUsername() {

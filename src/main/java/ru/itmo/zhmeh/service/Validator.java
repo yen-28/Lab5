@@ -32,6 +32,15 @@ public final class Validator {
         }
     }
 
+    //для обслуживания
+
+    public static void validateDetails(String details){
+        if ( details == null || details.isEmpty()){
+            throw new IllegalArgumentException("Ошибка: не может быть пустым");
+        } else if (details.length() > 128) {
+            throw new IllegalArgumentException("Ошибка: длина больше 128 символов");
+        }
+    }
 
 
 }
