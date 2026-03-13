@@ -8,7 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-
+/*
+ХРЮЮЮЮХРЮХРЮХРЮ ПОРОСЁНОК ХРЮХРЮХРЮ!!!!
+5252
+ХРХРХРХХРХР
+БЕГЕМОТ!!!!
+ */
 public class InstrumentsManager {
     private final Map<Long, Instrument> instruments = new HashMap<>();
 
