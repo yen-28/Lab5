@@ -60,6 +60,16 @@ public class InstrumentsManager {
         System.out.println(getInstruments()); //возможно стоит сделать красивее
     }
 
+    public void update(long id, String field, String value){
+        Instrument inst = instruments.get(id);
+
+        switch (field){
+            case "name":
+
+
+        }
+    }
+
 
 
 
