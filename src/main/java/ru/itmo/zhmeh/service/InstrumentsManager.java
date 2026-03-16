@@ -44,11 +44,13 @@ public class InstrumentsManager {
             throw new IllegalArgumentException("Ошибка: инвентарный номер: " + number + " занят");
         }
     }
-    public void addInstrument(String ownerUsername, String name, String type, String inventoryNumber, String location, String status){
+    public String addInstrument(String ownerUsername, String name, String type, String inventoryNumber, String location, String status){
         validateInventoryNumber(inventoryNumber);
         long id = generateId();
         Instrument instrument = new Instrument(id, ownerUsername, name, type, inventoryNumber, location, status);
         instruments.put(id, instrument);
+
+        return "OK instrument_id = " + id;
     }
 
     public String getById(long id){
