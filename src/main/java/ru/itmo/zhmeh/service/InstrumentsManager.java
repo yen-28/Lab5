@@ -9,10 +9,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /*
-ХРЮЮЮЮХРЮХРЮХРЮ ПОРОСЁНОК ХРЮХРЮХРЮ!!!!
-5252
-ХРХРХРХХРХР
-БЕГЕМОТ!!!!
+К КАЖДОМУ МЕТОДУ ДОБАВИТЬ ВЫВОД О ЗАВЕРШЕНИИ?
  */
 public class InstrumentsManager {
     private final Map<Long, Instrument> instruments = new HashMap<>();
@@ -65,14 +62,19 @@ public class InstrumentsManager {
         if (inst == null){
             throw new IllegalArgumentException("Ошибка: прибор с id: " + id + " не найден");
         }
-
         switch (field){
             case "name":
                 inst.setName(value);
+                break;
             case "location":
                 inst.setLocation(value);
+                break;
             case "status":
-                inst.setStatus(value); //дописываю валидаторы и преобразователи
+                inst.setStatus(value);
+                break;
+
+            default:
+                throw new IllegalArgumentException("Ошибка: нельзя изменить поле: " + field);
         }
     }
 
