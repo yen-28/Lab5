@@ -41,7 +41,7 @@ public class InstrumentsManager {
             throw new IllegalArgumentException("Ошибка: инвентарный номер: " + number + " занят");
         }
     }
-    public void addInstrument(String ownerUsername, String name, InstrumentType type, String inventoryNumber, String location, InstrumentStatus status){
+    public void addInstrument(String ownerUsername, String name, InstrumentType type, String inventoryNumber, String location, String status){
         validateInventoryNumber(inventoryNumber);
         long id = generateId();
         Instrument instrument = new Instrument(id, ownerUsername, name, type, inventoryNumber, location, status);
@@ -73,7 +73,6 @@ public class InstrumentsManager {
                 inst.setLocation(value);
             case "status":
                 inst.setStatus(value); //дописываю валидаторы и преобразователи
-
         }
     }
 

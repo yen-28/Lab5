@@ -30,7 +30,7 @@ public final class Instrument {
         setUpdatedAt(Instant.now());
         setOwnerUsername("SYSTEM"); // ВРЕМЕННО НА РАННИХ ЭТАПАХ
     }
-    public Instrument(long id, String ownerUsername, String name, InstrumentType type, String inventoryNumber, String location, InstrumentStatus status) {
+    public Instrument(long id, String ownerUsername, String name, InstrumentType type, String inventoryNumber, String location, String status) {
         this.id = id; // айди метод!!
         this.createdAt = Instant.now();
         this.updatedAt = Instant.now();
