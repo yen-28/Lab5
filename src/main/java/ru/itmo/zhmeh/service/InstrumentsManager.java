@@ -1,7 +1,6 @@
 package ru.itmo.zhmeh.service;
 
 import ru.itmo.zhmeh.things.Instrument;
-import ru.itmo.zhmeh.things.InstrumentStatus;
 import ru.itmo.zhmeh.things.InstrumentType;
 
 import java.util.HashMap;
@@ -20,6 +19,13 @@ public class InstrumentsManager {
     private long generateId() {
         return nextId++;
     }
+
+    public void checkInstrumentExistsId(long id){
+        if (!instruments.containsKey(id)){
+            throw new IllegalArgumentException("Ошибка: прибор с id: " + id + " не найден");
+        }
+    }
+
     /*
     Instrument :: getInventoryNumber эквивалентно лямбда выражению:
     inst -> inst.getInventoryNumbe
@@ -46,11 +52,8 @@ public class InstrumentsManager {
     }
 
     public Instrument getById(long id){
-        Instrument inst = instruments.get(id);
-        if (inst == null){
-            throw new IllegalArgumentException("Ошибка: прибор с id: " + id + " не найден");
-        }
-        return inst;
+        checkInstrumentExistsId(id);
+        return instruments.get(id);
     }
 
     public void list() {
@@ -58,10 +61,9 @@ public class InstrumentsManager {
     }
 
     public void update(long id, String field, String value){
+        checkInstrumentExistsId(id);
         Instrument inst = instruments.get(id);
-        if (inst == null){
-            throw new IllegalArgumentException("Ошибка: прибор с id: " + id + " не найден");
-        }
+
         switch (field){
             case "name":
                 inst.setName(value);
@@ -78,7 +80,10 @@ public class InstrumentsManager {
         }
     }
 
-
+    public void remove(Long id){
+        checkInstrumentExistsId(id);
+        instruments.remove(id);
+    }
 
 
 
