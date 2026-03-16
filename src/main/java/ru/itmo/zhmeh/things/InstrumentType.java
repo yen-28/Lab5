@@ -1,9 +1,21 @@
 package ru.itmo.zhmeh.things;
 
+import ru.itmo.zhmeh.validation.FieldValidator;
+
 public enum InstrumentType {
     PH_METER,
     BALANCE,
     SPECTROPHOTOMETER,
     CONDUCTIVITY_METER,
-    THERMOMETER
+    THERMOMETER;
+
+    public static InstrumentType typeFromString(String type){ // вопросы к логике, но вроде нормально + расположение метода
+        FieldValidator.validateType(type);
+        for (InstrumentType tp : InstrumentType.values()) {
+            if (tp.name().equalsIgnoreCase(type)) {
+                return tp;
+            }
+        }
+        throw new IllegalArgumentException("Ошибка: неизвестный тип: " + type);
+    }
 }

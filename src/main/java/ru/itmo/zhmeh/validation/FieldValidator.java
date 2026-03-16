@@ -30,6 +30,12 @@ public final class FieldValidator {
         }
     }
 
+    public static void validateType(String type){
+        if (type == null || type.isEmpty()){
+            throw new IllegalArgumentException("Ошибка: тип прибора не может быть пустым, выберете из списка");
+        }
+    }
+
 
     // для калибратора
 
