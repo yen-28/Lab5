@@ -24,6 +24,13 @@ public final class FieldValidator {
         }
     }
 
+    public static void validateStatus(String status){
+        if (status == null || status.isEmpty()){
+            throw new IllegalArgumentException("Ошибка: статус не может быть пустым, выберете из списка");
+        }
+    }
+
+
     // для калибратора
 
     public static void validateComment(String inventoryNumber){

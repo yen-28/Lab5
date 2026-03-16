@@ -104,8 +104,8 @@ public final class Instrument {
         touch();
     }
 
-    public void setStatus(InstrumentStatus status) {
-        this.status = status;
+    public void setStatus(String status) {
+        this.status = InstrumentStatus.statusFromString(status); // обработан пустой и некорректный регистр
         touch();
     }
 

@@ -57,15 +57,22 @@ public class InstrumentsManager {
     }
 
     public void list() {
-        System.out.println(getInstruments()); //возможно стоит сделать красивее
+        System.out.println(getInstruments()); //возможно стоит сделать красивее !!
     }
 
     public void update(long id, String field, String value){
         Instrument inst = instruments.get(id);
+        if (inst == null){
+            throw new IllegalArgumentException("Ошибка: прибор с id: " + id + " не найден");
+        }
 
         switch (field){
             case "name":
-
+                inst.setName(value);
+            case "location":
+                inst.setLocation(value);
+            case "status":
+                inst.setStatus(value); //дописываю валидаторы и преобразователи
 
         }
     }
