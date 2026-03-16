@@ -11,7 +11,7 @@ import java.util.Objects;
 К КАЖДОМУ МЕТОДУ ДОБАВИТЬ ВЫВОД О ЗАВЕРШЕНИИ?
  */
 public class InstrumentsManager {
-    private final Map<Long, Instrument> instruments = new HashMap<>();
+    private final Map<Long, Instrument> instruments = new HashMap<>(); //квен порекомендовал меп на всякий случай
 
     private long nextId = 1;
 
@@ -20,7 +20,7 @@ public class InstrumentsManager {
         return nextId++;
     }
 
-    public void checkInstrumentExistsId(long id){
+    public void checkInstrumentExistsId(long id){ //паблик на всякий случай, вдруг надо будет
         if (!instruments.containsKey(id)){
             throw new IllegalArgumentException("Ошибка: прибор с id: " + id + " не найден");
         }
@@ -51,16 +51,16 @@ public class InstrumentsManager {
         instruments.put(id, instrument);
     }
 
-    public Instrument getById(long id){
+    public String getById(long id){
         checkInstrumentExistsId(id);
-        return instruments.get(id);
+        return instruments.get(id).toString();
     }
 
     public void list() {
         System.out.println(getInstruments()); //возможно стоит сделать красивее !!
     }
 
-    public void update(long id, String field, String value){
+    public String update(long id, String field, String value){
         checkInstrumentExistsId(id);
         Instrument inst = instruments.get(id);
 
@@ -78,6 +78,7 @@ public class InstrumentsManager {
             default:
                 throw new IllegalArgumentException("Ошибка: нельзя изменить поле: " + field);
         }
+        return "OK";
     }
 
     public void remove(Long id){

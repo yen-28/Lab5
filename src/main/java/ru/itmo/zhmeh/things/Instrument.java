@@ -138,16 +138,12 @@ public final class Instrument {
 
     @Override
     public String toString() {
-        return "Instrument{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type=" + type +
-                ", inventoryNumber='" + inventoryNumber + '\'' +
-                ", location='" + location + '\'' +
-                ", status=" + status +
-                ", ownerUsername='" + ownerUsername + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+        return "Instrument " +
+                "id: " + id + '\n' +
+                " name: " + name + '\n' +
+                " type: " + type + '\n' +
+                " inventoryNumber: " + inventoryNumber + '\n' +
+                " location: " + location + '\n' +
+                " status: " + status + '\n'; // + последняя калибровка?
     }
 }
