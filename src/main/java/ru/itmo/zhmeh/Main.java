@@ -1,10 +1,8 @@
 package ru.itmo.zhmeh;
 
 import ru.itmo.zhmeh.service.InstrumentsManager;
-import ru.itmo.zhmeh.things.*;
 
-import static ru.itmo.zhmeh.things.InstrumentStatus.ACTIVE;
-import static ru.itmo.zhmeh.things.InstrumentType.*;
+import static ru.itmo.zhmeh.domain.InstrumentType.*;
 
 public class Main {
     public static void main(String[] args){

@@ -1,7 +1,6 @@
 package ru.itmo.zhmeh.service;
 
-import ru.itmo.zhmeh.things.Instrument;
-import ru.itmo.zhmeh.things.InstrumentType;
+import ru.itmo.zhmeh.domain.Instrument;
 
 import java.util.HashMap;
 import java.util.Map;

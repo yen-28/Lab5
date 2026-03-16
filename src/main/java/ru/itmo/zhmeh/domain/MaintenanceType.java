@@ -1,4 +1,4 @@
-package ru.itmo.zhmeh.things;
+package ru.itmo.zhmeh.domain;
 
 public enum MaintenanceType {
     SERVICE,
