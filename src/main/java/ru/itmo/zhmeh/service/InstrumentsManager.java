@@ -9,7 +9,7 @@ import java.util.Objects;
 /*
 К КАЖДОМУ МЕТОДУ ДОБАВИТЬ ВЫВОД О ЗАВЕРШЕНИИ?
  */
-public class InstrumentsManager {
+public final class InstrumentsManager {
     private final Map<Long, Instrument> instruments = new HashMap<>(); //квен порекомендовал меп на всякий случай
 
     private long nextId = 1;

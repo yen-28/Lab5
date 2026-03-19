@@ -6,13 +6,13 @@ import java.time.Instant;
 import java.util.Objects;
 
 public final class Calibration {
-    // Уникальный номер калибровки. Программа назначает сама.
+    // Уникальный номер калибровки. Программа назначает сама. +
     private final long id;
     // Какому прибору принадлежит (id прибора).
 // Должен ссылаться на реально существующий Instrument.
     private final long instrumentId;
     // Тип калибровки (например ONE_POINT, TWO_POINT). Выбирается из списка CalibrationType. -
-    private final CalibrationType type;
+    private CalibrationType type;
     // Результат: OK или FAIL. -
     private CalibrationResult result;
     // Комментарий (например "buffers 4.00 and 7.00"). Можно пусто. До 128 символов. +
@@ -32,9 +32,9 @@ public final class Calibration {
         this.calibratedAt = Instant.now();
     }
 
-    public Calibration(long id, CalibrationType type, long instrumentId, CalibrationResult result, String comment, Instant calibratedAt, String ownerUsername) {
-        this.id = id; // сделать
-        this.type = type;
+    public Calibration(long id, String type, long instrumentId, CalibrationResult result, String comment, Instant calibratedAt, String ownerUsername) {
+        this.id = id;
+        this.setCalType(type);
         this.instrumentId = instrumentId; //СДЕЛАТЬ
         this.result = result; //?? СПРОСИТЬ ЧТО ЗНАЧИТ РЕЗУЛЬТАТ
         this.setComment(comment);
@@ -97,6 +97,10 @@ public final class Calibration {
 
     public void setOwnerUsername() {
         this.ownerUsername = "SYSTEM"; //временно
+    }
+
+    public void setCalType(String type) {
+        this.type = CalibrationType.calTypeFromString(type);
     }
 
     @Override

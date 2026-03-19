@@ -1,11 +1,46 @@
 package ru.itmo.zhmeh.validation;
 
 public final class FieldValidator {
+
+
+    // для всех строковых тк одинаковая логика
+
+    public static void validateIsStringEmpty(String value, StringValidationType type ){
+        if (value == null || value.isEmpty()){
+            switch (type){
+                // инструмент
+                case INST_NAME:
+                    throw new IllegalArgumentException("Ошибка: имя прибора не может быть пустым");
+
+                case INST_TYPE:
+                    throw new IllegalArgumentException("Ошибка: тип прибора не может быть пустым, выберете из списка");
+
+                case INST_STATUS:
+                    throw new IllegalArgumentException("Ошибка: статус прибора не может быть пустым, выберете из списка");
+
+                case INST_LOCATION:
+                    throw new IllegalArgumentException("Ошибка: расположение прибора не может быть пустым");
+
+                //калибратор
+                case CAL_RESULT:
+                    throw new IllegalArgumentException("Ошибка: результат калибровки не может быть пустым, выберете из списка");
+                case CAL_TYPE:
+                    throw new IllegalArgumentException("Ошибка: тип калибровки не может быть пустым, выберете из списка");
+
+                //обслуживание
+                case MAINTEN_TYPE:
+                    throw new IllegalArgumentException("Ошибка: тип обслуживания не может быть пустым, выберете из списка");
+
+                case MAINTEN_DETAILS:
+                    throw new IllegalArgumentException("Ошибка: детали обслуживания не могут быть пустыми");
+            }
+        }
+    }
+
     // для инструмента
     public static void validateName(String name){
-        if ( name == null || name.isEmpty()){
-            throw new IllegalArgumentException("Ошибка: имя не может быть пустым");
-        } else if (name.length() > 128) {
+        validateIsStringEmpty(name, StringValidationType.INST_NAME);
+        if (name.length() > 128) {
             throw new IllegalArgumentException("Ошибка: длина больше 128 символов");
         }
     }
@@ -17,22 +52,9 @@ public final class FieldValidator {
     }
 
     public static void validateLocation(String location){
-        if ( location == null || location.isEmpty()){
-            throw new IllegalArgumentException("Ошибка: расположение не может быть пустым");
-        } else if (location.length() > 64) {
+        validateIsStringEmpty(location, StringValidationType.INST_LOCATION);
+        if (location.length() > 64) {
             throw new IllegalArgumentException("Ошибка: длина больше 64 символов");
-        }
-    }
-
-    public static void validateStatus(String status){
-        if (status == null || status.isEmpty()){
-            throw new IllegalArgumentException("Ошибка: статус не может быть пустым, выберете из списка");
-        }
-    }
-
-    public static void validateType(String type){
-        if (type == null || type.isEmpty()){
-            throw new IllegalArgumentException("Ошибка: тип прибора не может быть пустым, выберете из списка");
         }
     }
 
@@ -45,15 +67,13 @@ public final class FieldValidator {
         }
     }
 
+
     //для обслуживания
 
     public static void validateDetails(String details){
-        if ( details == null || details.isEmpty()){
-            throw new IllegalArgumentException("Ошибка: не может быть пустым");
-        } else if (details.length() > 128) {
+        validateIsStringEmpty(details, StringValidationType.MAINTEN_DETAILS);
+        if (details.length() > 128) {
             throw new IllegalArgumentException("Ошибка: длина больше 128 символов");
         }
     }
-
-
 }
