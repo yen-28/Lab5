@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static ru.itmo.zhmeh.service.IdGenerator.generateId;
+
 /*
-К КАЖДОМУ МЕТОДУ ДОБАВИТЬ ВЫВОД О ЗАВЕРШЕНИИ?
+К КАЖДОМУ МЕТОДУ ДОБАВИТЬ ВЫВОД О ЗАВЕРШЕНИИ? ++
  */
-public final class InstrumentsManager extends Manager {
+public final class InstrumentsManager {
     private final Map<Long, Instrument> instruments = new HashMap<>(); //квен порекомендовал меп на всякий случай
 
 
@@ -37,7 +39,7 @@ public final class InstrumentsManager extends Manager {
             throw new IllegalArgumentException("Ошибка: инвентарный номер: " + number + " занят");
         }
     }
-    public String addInstrument(String ownerUsername, String name, String type, String inventoryNumber, String location, String status){
+    public String addNew(String ownerUsername, String name, String type, String inventoryNumber, String location, String status){
         validateInventoryNumber(inventoryNumber);
         long id = generateId();
         Instrument instrument = new Instrument(id, ownerUsername, name, type, inventoryNumber, location, status);
@@ -76,9 +78,10 @@ public final class InstrumentsManager extends Manager {
         return "OK";
     }
 
-    public void remove(Long id){
+    public String remove(Long id){
         checkInstrumentExistsId(id);
         instruments.remove(id);
+        return "OK";
     }
 
 
