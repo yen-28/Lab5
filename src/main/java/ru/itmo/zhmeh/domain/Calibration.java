@@ -24,19 +24,12 @@ public final class Calibration {
     // Когда запись создана. Программа ставит автоматически.
     private final Instant createdAt;
 
-    public Calibration(long id, CalibrationType type, Instant createdAt, long instrumentId) {
-        this.id = id; //сделать
-        this.type = type;
-        this.createdAt = Instant.now();
-        this.instrumentId = instrumentId;// ??
-        this.calibratedAt = Instant.now();
-    }
 
-    public Calibration(long id, String type, long instrumentId, CalibrationResult result, String comment, Instant calibratedAt, String ownerUsername) {
+    public Calibration(long id, String type, long instrumentId, String result, String comment, Instant calibratedAt, String ownerUsername) {
         this.id = id;
         this.setCalType(type);
         this.instrumentId = instrumentId; //СДЕЛАТЬ
-        this.result = result; //?? СПРОСИТЬ ЧТО ЗНАЧИТ РЕЗУЛЬТАТ
+        this.setResult(result); //+ СПРОСИТЬ ЧТО ЗНАЧИТ РЕЗУЛЬТАТ
         this.setComment(comment);
         this.setCalibratedAt(calibratedAt);
         this.setOwnerUsername(); //!! временно
@@ -79,8 +72,8 @@ public final class Calibration {
 
 // setters
 
-    public void setResult(CalibrationResult result) {
-        this.result = result;
+    public void setResult(String result) {
+        this.result = CalibrationResult.calResultFromString(result);
     }
 
     public void setComment(String comment) {

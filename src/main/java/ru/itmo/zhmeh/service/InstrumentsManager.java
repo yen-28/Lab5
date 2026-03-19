@@ -9,15 +9,9 @@ import java.util.Objects;
 /*
 К КАЖДОМУ МЕТОДУ ДОБАВИТЬ ВЫВОД О ЗАВЕРШЕНИИ?
  */
-public final class InstrumentsManager {
+public final class InstrumentsManager extends Manager {
     private final Map<Long, Instrument> instruments = new HashMap<>(); //квен порекомендовал меп на всякий случай
 
-    private long nextId = 1;
-
-
-    private long generateId() {
-        return nextId++;
-    }
 
     public void checkInstrumentExistsId(long id){ //паблик на всякий случай, вдруг надо будет
         if (!instruments.containsKey(id)){
