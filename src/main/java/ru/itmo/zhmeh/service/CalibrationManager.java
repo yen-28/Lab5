@@ -3,6 +3,7 @@ package ru.itmo.zhmeh.service;
 import ru.itmo.zhmeh.domain.Calibration;
 import ru.itmo.zhmeh.domain.Instrument;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,13 +19,13 @@ public final class CalibrationManager {
         }
     }
 
-//    public String addNew(String ownerUsername, String name, String type, String inventoryNumber, String location, String status){
-//        long id = generateId();
-//        Calibration calibration = new Calibration(id, ownerUsername, name, type, inventoryNumber, location, status);
-//        calibrations.put(id, calibration);
-//
-//        return "OK instrument_id = " + id;
-//    }
+    public String addNew(String type, long instrumentId, String result, String comment, Instant calibratedAt, String ownerUsername){
+        long id = generateId();
+        Calibration calibration = new Calibration(id, type, instrumentId, result, comment, calibratedAt, ownerUsername);
+        calibrations.put(id, calibration); //добавить проверку инструмент айди?
+
+        return "OK calibration_id = " + id;
+    }
 
 
 
