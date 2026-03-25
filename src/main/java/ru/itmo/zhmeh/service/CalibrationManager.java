@@ -4,12 +4,10 @@ import ru.itmo.zhmeh.domain.Calibration;
 
 import java.time.Instant;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static ru.itmo.zhmeh.domain.InstrumentStatus.ACTIVE;
 import static ru.itmo.zhmeh.domain.InstrumentStatus.OUT_OF_SERVICE;
 import static ru.itmo.zhmeh.service.IdGenerator.generateId;
 

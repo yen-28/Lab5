@@ -12,7 +12,7 @@ public enum InstrumentType {
 
     public static InstrumentType typeFromString(String type){ // вопросы к логике, но вроде нормально + расположение метода
         FieldValidator.validateIsStringEmpty(type, StringValidationType.INST_TYPE);
-        for (InstrumentType tp : InstrumentType.values()) {
+        for (InstrumentType tp : InstrumentType.values()) { //для каждого tp из списка значений инструменттайп
             if (tp.name().equalsIgnoreCase(type)) {
                 return tp;
             }

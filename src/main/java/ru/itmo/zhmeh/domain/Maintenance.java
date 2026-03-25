@@ -29,12 +29,12 @@ public final class Maintenance {
         this.doneAt = Instant.now();
     }
 
-    public Maintenance(long instrumentId, long id, MaintenanceType type, String details, Instant doneAt, String ownerUsername) {
-        this.instrumentId = instrumentId;
+    public Maintenance(long id, long instrumentId, String type, String details, Instant doneAt, String ownerUsername) {
         this.createdAt = Instant.now();
         this.id = id;
-        this.type = type;
-        this.details = details;
+        this.instrumentId = instrumentId;
+        this.setType(type);
+        this.setDetails(details);
         this.setDoneAt(doneAt);
         this.setOwnerUsername(ownerUsername); //временно иллюзия выбора
     }
@@ -70,8 +70,8 @@ public final class Maintenance {
 
     //setters
 
-    public void setType(MaintenanceType type) {
-        this.type = type;
+    public void setType(String type) {
+        this.type = MaintenanceType.fromString(type);
     }
 
     public void setDetails(String details) {
@@ -93,12 +93,12 @@ public final class Maintenance {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Maintenance that)) return false;
-        return id == that.id && instrumentId == that.instrumentId && type == that.type && Objects.equals(details, that.details) && Objects.equals(doneAt, that.doneAt) && Objects.equals(ownerUsername, that.ownerUsername) && Objects.equals(createdAt, that.createdAt);
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, instrumentId, type, details, doneAt, ownerUsername, createdAt);
+        return Objects.hash(id);
     }
 
     @Override
