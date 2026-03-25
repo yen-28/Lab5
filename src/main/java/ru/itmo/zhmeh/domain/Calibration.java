@@ -106,4 +106,15 @@ public final class Calibration {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "Calibration " +
+                "id: " + id + '\n' +
+                " instrumentId: " + instrumentId + '\n' +
+                " type: " + type + '\n' +
+                " result: " + result + '\n' +
+                " comment: '" + comment + "' \n" +
+                " calibratedAt: " + calibratedAt ;
+    }
 }

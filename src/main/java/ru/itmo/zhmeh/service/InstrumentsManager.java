@@ -48,9 +48,9 @@ public final class InstrumentsManager {
         return "OK instrument_id = " + id;
     }
 
-    public String getById(long id){
+    public Instrument getById(long id){
         checkInstrumentExistsId(id);
-        return instruments.get(id).toString();
+        return instruments.get(id);
     }
 
     public void list() {
