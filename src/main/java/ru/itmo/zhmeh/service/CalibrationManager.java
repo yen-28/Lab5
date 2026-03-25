@@ -38,7 +38,7 @@ public final class CalibrationManager {
         return "OK calibration_id = " + id;
     }
 
-    public Collection<Calibration> getCalibrationsListById (long InstId){// коллекшион потому что универсально
+    public Collection<Calibration> getCalibrationsListByInstId(long InstId){// коллекшион потому что универсально
         instrumentsManager.checkInstrumentExistsId(InstId);
         return calibrations.values().stream()
                 .filter(cal -> cal.getInstrumentId() == InstId)
