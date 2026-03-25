@@ -96,10 +96,7 @@ public final class InstrumentsManager {
     }
 
     public boolean isInstrumentDue(Instrument instrument, Instant deadline){ //логика для dueInstruments
-        if (instrument.getLastCalibration() == null || instrument.getLastCalibration().isBefore(deadline) || instrument.getLastCalibration().equals(deadline)){
-            return true;
-        }
-        return false;
+        return instrument.getLastCalibration() == null || instrument.getLastCalibration().isBefore(deadline) || instrument.getLastCalibration().equals(deadline);
     }
 
 

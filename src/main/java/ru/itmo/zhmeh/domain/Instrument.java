@@ -130,10 +130,11 @@ public final class Instrument {
         touch();
     }
 
-    public void setLastCalibration(Instant lastCalibration) {
-        if (lastCalibration.isAfter(getLastCalibration())) {
+    public void setLastCalibration(Instant lastCalibration) { //бездушная машина хочет заставить меня не делать сеттер, каждый раз проверять это условие через менеджер
+        if (this.lastCalibration == null || lastCalibration.isAfter(this.lastCalibration)) {
             this.lastCalibration = lastCalibration;
         }
+        touch();
     }
 
     @Override
