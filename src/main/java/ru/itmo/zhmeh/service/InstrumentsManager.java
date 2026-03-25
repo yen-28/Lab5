@@ -2,9 +2,13 @@ package ru.itmo.zhmeh.service;
 
 import ru.itmo.zhmeh.domain.Instrument;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static ru.itmo.zhmeh.service.IdGenerator.generateId;
 
@@ -82,6 +86,20 @@ public final class InstrumentsManager {
         checkInstrumentExistsId(id);
         instruments.remove(id);
         return "OK";
+    }
+
+    public List<Instrument> dueInstruments(int days){  //название?
+        Instant deadline = Instant.now().minus(days, ChronoUnit.DAYS);
+        return instruments.values().stream()
+                .filter(inst -> isInstrumentDue(inst, deadline))
+                .collect(Collectors.toList());
+    }
+
+    public boolean isInstrumentDue(Instrument instrument, Instant deadline){ //логика для dueInstruments
+        if (instrument.getLastCalibration() == null || instrument.getLastCalibration().isBefore(deadline) || instrument.getLastCalibration().equals(deadline)){
+            return true;
+        }
+        return false;
     }
 
 

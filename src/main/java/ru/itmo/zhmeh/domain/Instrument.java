@@ -25,6 +25,8 @@ public final class Instrument {
     // Когда обновляли. Программа обновляет автоматически. +
     private Instant updatedAt;
 
+    private Instant lastCalibration;
+
 
     private void touch(){
         setUpdatedAt(Instant.now());
@@ -85,7 +87,12 @@ public final class Instrument {
     public Instant getUpdatedAt() {
         return updatedAt;
     }
-// setters
+
+    public Instant getLastCalibration() {
+        return lastCalibration;
+    }
+
+    // setters
 
     public void setType(String type) {
         this.type = InstrumentType.typeFromString(type);
@@ -123,7 +130,11 @@ public final class Instrument {
         touch();
     }
 
-
+    public void setLastCalibration(Instant lastCalibration) {
+        if (lastCalibration.isAfter(getLastCalibration())) {
+            this.lastCalibration = lastCalibration;
+        }
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -144,6 +155,7 @@ public final class Instrument {
                 " type: " + type + '\n' +
                 " inventoryNumber: " + inventoryNumber + '\n' +
                 " location: " + location + '\n' +
-                " status: " + status + '\n'; // + последняя калибровка?
+                " status: " + status + '\n' +
+                " lastCalibration: " + lastCalibration + '\n';
     }
 }
