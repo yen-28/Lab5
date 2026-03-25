@@ -5,6 +5,7 @@ import ru.itmo.zhmeh.domain.Calibration;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -35,10 +36,12 @@ public final class CalibrationManager {
         Calibration calibration = new Calibration(id, type, instrumentId, result, comment, calibratedAt, ownerUsername);
         calibrations.put(id, calibration);
 
+        instrumentsManager.getById(instrumentId).setLastCalibration(calibratedAt);
+
         return "OK calibration_id = " + id;
     }
 
-    public Collection<Calibration> getCalibrationsListByInstId(long InstId){// коллекшион потому что универсально
+    public List<Calibration> getCalibrationsListByInstId(long InstId){ //последние N ???
         instrumentsManager.checkInstrumentExistsId(InstId);
         return calibrations.values().stream()
                 .filter(cal -> cal.getInstrumentId() == InstId)
