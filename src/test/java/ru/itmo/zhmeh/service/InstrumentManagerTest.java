@@ -1,8 +1,12 @@
 package ru.itmo.zhmeh.service;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.BeforeEach;
+import ru.itmo.zhmeh.domain.Instrument;
+
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,9 +24,13 @@ class InstrumentManagerTest {
     void testAddInstrument(){
         //Подготовка
 
-        String name = "PH_METER";
+        InstrumentsManager manager = new InstrumentsManager();
+        manager.addNew(null, "gbsdv", "PH_METER", "123", "баня", "active");
 
         //Действие
+
+        Map<Long, Instrument> instruments = manager.getInstruments();
+        Assertions.assertTrue(instruments.containsKey(2L));
 
     }
 

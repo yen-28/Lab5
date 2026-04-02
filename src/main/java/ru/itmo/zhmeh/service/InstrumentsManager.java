@@ -31,7 +31,7 @@ public final class InstrumentsManager {
     - оно берёт каждый новый "инст" и для него выполняет метод
      */
 
-    private void validateInventoryNumber(String number) {
+    private void validateInventoryNumber(String number) throws IllegalArgumentException {
         if (number == null || number.isEmpty()) { //пустые и налл не проверяем
             return;
         }
@@ -43,13 +43,13 @@ public final class InstrumentsManager {
             throw new IllegalArgumentException("Ошибка: инвентарный номер: " + number + " занят");
         }
     }
-    public String addNew(String ownerUsername, String name, String type, String inventoryNumber, String location, String status){
+    public long addNew(String ownerUsername, String name, String type, String inventoryNumber, String location, String status){
         validateInventoryNumber(inventoryNumber);
         long id = generateId();
         Instrument instrument = new Instrument(id, ownerUsername, name, type, inventoryNumber, location, status);
         instruments.put(id, instrument);
 
-        return "OK instrument_id = " + id;
+        return id;
     }
 
     public Instrument getById(long id){
@@ -82,10 +82,10 @@ public final class InstrumentsManager {
         return "OK";
     }
 
-    public String remove(Long id){
+    public long remove(Long id){
         checkInstrumentExistsId(id);
         instruments.remove(id);
-        return "OK";
+        return id;
     }
 
     public List<Instrument> dueInstruments(int days){  //название?

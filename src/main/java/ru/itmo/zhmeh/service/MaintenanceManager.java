@@ -16,14 +16,14 @@ public final class MaintenanceManager {
         this.instrumentsManager = instrumentsManager;
     }
 
-    public String addNew(long instrumentId, String type, String details, Instant doneAt, String ownerUsername){
+    public long addNew(long instrumentId, String type, String details, Instant doneAt, String ownerUsername){
         long id = IdGenerator.generateId();
         instrumentsManager.checkInstrumentExistsId(instrumentId);
 
         Maintenance maintenance = new Maintenance(id, instrumentId, type, details, doneAt, ownerUsername);
         maintenances.put(id, maintenance);
 
-        return "OK maintenance_id = " + id;
+        return id;
     }
 
     public Collection<Maintenance> getMaintenancesListByInstId(long instId){

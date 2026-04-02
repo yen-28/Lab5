@@ -4,14 +4,15 @@ import ru.itmo.zhmeh.service.InstrumentsManager;
 
 public final class InstAdd extends Command{
 
-    private final boolean isInputSeparated = true; //???
-    private final String name = "inst_add";
+     //???
+    //String name = "inst_add";
 
 /*
 ВСЁ СДЕЛАТЬ ПО УМУ
  */
     @Override
-    public void execute() {
+    public void execute(CommandManager cm, String[] args) {
+
 
 
     }
@@ -24,14 +25,5 @@ public final class InstAdd extends Command{
     @Override
     public void checkArgs() {
 
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public boolean isInputSeparated() {
-        return isInputSeparated;
     }
 }
