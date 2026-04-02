@@ -11,8 +11,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);  //пока не разбирался
 
         CommandManager commandManager = new CommandManager(); // добавляю команды в список
-        commandManager.addCommand("inst_add", new InstAdd());
-        commandManager.addCommand("help", new Help()); //TODO сделать хелп
+        commandManager.addCommand(InstAdd.getName(), new InstAdd());
+        commandManager.addCommand(Help.getName(), new Help()); //TODO сделать хелп
 
 
 
@@ -23,10 +23,9 @@ public class Main {
                     System.out.println("ВЫХОД. СПАСИБО ЗА ИСПОЛЬЗОВАНИЕ!");
                     break;
                 }
-
-
-
                 if (input.isEmpty()) continue;
+
+                //TODO сделать ввод и использование команд
 
             }
             catch (Exception e){

@@ -4,7 +4,7 @@ import ru.itmo.zhmeh.service.InstrumentsManager;
 
 public final class InstAdd extends Command{
 
-    String name = "inst_add"; //?? Что не работало?
+    private final static String name = "inst_add"; //?? Что не работало?
 
 /*
 ВСЁ СДЕЛАТЬ ПО УМУ
