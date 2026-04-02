@@ -30,7 +30,7 @@ class InstrumentManagerTest {
         //Действие
 
         Map<Long, Instrument> instruments = manager.getInstruments();
-        Assertions.assertTrue(instruments.containsKey(2L));
+        Assertions.assertTrue(instruments.containsKey(1L));
 
     }
 
