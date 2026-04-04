@@ -2,8 +2,6 @@ package ru.itmo.zhmeh.cli;
 
 public abstract class Command {
 
-     //TODO АДЕКВАТНО СДЕЛАТЬ ИМЯ
-    //protected boolean isInputSeparated; //TODO решить надо или нет
 
 
 

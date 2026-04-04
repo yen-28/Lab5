@@ -2,14 +2,14 @@ package ru.itmo.zhmeh.cli;
 
 import java.util.Scanner;
 
-public final class myReader {
+public final class MyReader {
 
 //    private String commandName;
 //    public String[] commandArgs;
 
     private final Scanner scanner;
 
-    public myReader(Scanner scanner) {
+    public MyReader(Scanner scanner) {
         this.scanner = scanner;
     }
 

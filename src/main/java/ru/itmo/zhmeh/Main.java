@@ -14,8 +14,7 @@ public class Main {
         commandManager.addCommand(Help.getName(), new Help()); //TODO сделать хелп
 
 
-
-        while (true){
+        while (true) {
             String input = scanner.nextLine().trim();
             MyReader reader = new MyReader(scanner);
             try {
