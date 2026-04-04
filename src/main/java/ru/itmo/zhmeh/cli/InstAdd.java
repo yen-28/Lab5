@@ -4,16 +4,19 @@ import ru.itmo.zhmeh.service.InstrumentsManager;
 
 public final class InstAdd extends Command{
 
-    private final static String name = "inst_add"; //?? Что не работало?
+    private static final String name =  "inst_add";
+
 
 /*
 ВСЁ СДЕЛАТЬ ПО УМУ
  */
     @Override
-    public void execute(CommandManager cm, String[] args) {
+    public void execute(CommandManager cm, String args) {
 
+    }
 
-
+    public static String getName(){
+        return name;
     }
 
     @Override
@@ -21,8 +24,8 @@ public final class InstAdd extends Command{
         return name + ": добавить новый прибор";
     }
 
-    @Override
-    public void checkArgs() {
-
-    }
+//    @Override
+//    public void checkArgs() {
+//
+//    }
 }

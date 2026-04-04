@@ -4,8 +4,11 @@ import ru.itmo.zhmeh.cli.CommandManager;
 
 public final class Help extends Command{
 
+    private static final String name =  "help";
+
+
     @Override
-    public void execute(CommandManager cm, String[] args) {
+    public void execute(CommandManager cm, String args) {
         for(Command command : cm.getCommands().values()){
             System.out.println(command.getHelp());
         }
@@ -17,8 +20,11 @@ public final class Help extends Command{
         return name + ": возвращает список команд";
     }
 
-    @Override
-    public void checkArgs() {
-
+    public static String getName() {
+        return name;
     }
+
+//    @Override
+//    public void checkArgs() {
+//    }
 }

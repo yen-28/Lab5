@@ -2,17 +2,19 @@ package ru.itmo.zhmeh.cli;
 
 public abstract class Command {
 
-    protected  static String name; //TODO АДЕКВАТНО СДЕЛАТЬ ИМЯ
-    protected boolean isInputSeparated; //TODO решить надо или нет
+     //TODO АДЕКВАТНО СДЕЛАТЬ ИМЯ
+    //protected boolean isInputSeparated; //TODO решить надо или нет
 
-    public abstract void execute(CommandManager cm, String[] args);
+
+
+
+    public abstract void execute(CommandManager cm, String args);
     public abstract String getHelp();
-    public abstract void checkArgs();//????
+    //public abstract void checkArgs();//????
 
-    public boolean getIsInputSeparated() {
-        return isInputSeparated;
-    }
-    public static String getName(){
-        return name;
-    }
+//    public boolean getIsInputSeparated() {
+//        return isInputSeparated;
+//    }
+
+
 }

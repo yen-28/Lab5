@@ -1,12 +1,11 @@
 package ru.itmo.zhmeh;
 
 import ru.itmo.zhmeh.cli.*;
-import ru.itmo.zhmeh.service.*;
 
 import java.util.Scanner;
 
 public class Main {
-    public static final InstrumentsManager instrumentsManager = new InstrumentsManager();
+    //public static final InstrumentsManager instrumentsManager = new InstrumentsManager();
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);  //пока не разбирался
 
@@ -17,13 +16,19 @@ public class Main {
 
 
         while (true){
-            String input = scanner.nextLine();
+            String input = scanner.nextLine().trim();
+            myReader reader = new myReader(scanner);
             try {
                 if (input.equalsIgnoreCase("exit")){
                     System.out.println("ВЫХОД. СПАСИБО ЗА ИСПОЛЬЗОВАНИЕ!");
                     break;
                 }
                 if (input.isEmpty()) continue;
+
+                String[] splitedInput = reader.splitInput(input);
+                String commandName = splitedInput[0];
+                String commandArgs = (splitedInput.length > 1) ? splitedInput[1] : "";
+                commandManager.getCommands().get(commandName).execute(commandManager, commandArgs); //замучился придумывать гениальную архитектуру
 
                 //TODO сделать ввод и использование команд
 

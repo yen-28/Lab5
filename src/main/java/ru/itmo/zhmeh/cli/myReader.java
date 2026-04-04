@@ -2,17 +2,37 @@ package ru.itmo.zhmeh.cli;
 
 import java.util.Scanner;
 
-public final class Reader {
+public final class myReader {
+
+//    private String commandName;
+//    public String[] commandArgs;
 
     private final Scanner scanner;
 
-    public Reader(Scanner scanner) {
+    public myReader(Scanner scanner) {
         this.scanner = scanner;
+    }
+
+    public String[] splitInput(String input){
+        return input.trim().split(" ", 2);
+
+
     }
 
     public String readString(String prompt) {
         System.out.println(prompt);
         return scanner.nextLine().trim();
+    }
+
+    public String readNonEmptyString(String prompt) { //TODO хочу или нет?
+        while (true) {
+            System.out.print(prompt);
+            String value = scanner.nextLine().trim();
+            if (!value.isEmpty()) {
+                return value;
+            }
+            System.out.println("Ошибка: значение не может быть пустым");
+        }
     }
 
     public long readLong(String prompt){
