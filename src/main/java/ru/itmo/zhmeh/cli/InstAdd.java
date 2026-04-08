@@ -10,7 +10,9 @@ public final class InstAdd extends Command {
     ВСЁ СДЕЛАТЬ ПО УМУ
      */
     @Override
-    public void execute(CommandManager cm, String args) {
+    public void execute(CommandManager cm, MyReader reader, String args) {
+
+
 //TODO 1 Здесь делаем ввод с помощью ридера
     }
 

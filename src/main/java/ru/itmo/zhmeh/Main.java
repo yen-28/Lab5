@@ -28,7 +28,7 @@ public class Main {
                 String commandName = splitedInput[0];
                 String commandArgs = (splitedInput.length > 1) ? splitedInput[1] : "";
                 if(commandManager.getCommands().containsKey(commandName)) {
-                    commandManager.getCommands().get(commandName).execute(commandManager, commandArgs); //замучился придумывать гениальную архитектуру
+                    commandManager.getCommands().get(commandName).execute(commandManager, reader, commandArgs); //замучился придумывать гениальную архитектуру
                 } else {
                     System.err.println("Command not found");
                 }

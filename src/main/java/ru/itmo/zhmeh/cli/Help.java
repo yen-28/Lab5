@@ -8,7 +8,7 @@ public final class Help extends Command{
 
 
     @Override
-    public void execute(CommandManager cm, String args) {
+    public void execute(CommandManager cm, MyReader reader, String args) {
         for(Command command : cm.getCommands().values()){
             System.out.println(command.getHelp());
         }
