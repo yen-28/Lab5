@@ -8,8 +8,8 @@ public final class Help extends Command{
 
 
     @Override
-    public void execute(CommandManager cm, MyReader reader, String args) {
-        for(Command command : cm.getCommands().values()){
+    public void execute(Environment environment, String args) {
+        for(Command command : environment.getCommandManager().getCommands().values()){
             System.out.println(command.getHelp());
         }
         System.out.println("exit: выход из программы");

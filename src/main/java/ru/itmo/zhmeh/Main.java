@@ -7,16 +7,15 @@ import java.util.Scanner;
 public class Main {
     //public static final InstrumentsManager instrumentsManager = new InstrumentsManager();
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);  //пока не разбирался
+        Scanner scanner = new Scanner(System.in);
+        Environment environment = new Environment(new MyReader(scanner)); //пока не разбирался
 
-        CommandManager commandManager = new CommandManager(); // добавляю команды в список
-        commandManager.addCommand(InstAdd.getName(), new InstAdd());
-        commandManager.addCommand(Help.getName(), new Help()); //TODO сделать хелп
+        //TODO сделать хелп
 
 
         while (true) {
             String input = scanner.nextLine().trim();
-            MyReader reader = new MyReader(scanner);
+
             try {
                 if (input.equalsIgnoreCase("exit")) {
                     System.out.println("ВЫХОД. СПАСИБО ЗА ИСПОЛЬЗОВАНИЕ!");
@@ -24,11 +23,11 @@ public class Main {
                 }
                 if (input.isEmpty()) continue;
 
-                String[] splitedInput = reader.splitInput(input);
+                String[] splitedInput = environment.getReader().splitInput(input);
                 String commandName = splitedInput[0];
                 String commandArgs = (splitedInput.length > 1) ? splitedInput[1] : "";
-                if(commandManager.getCommands().containsKey(commandName)) {
-                    commandManager.getCommands().get(commandName).execute(commandManager, reader, commandArgs); //замучился придумывать гениальную архитектуру
+                if(environment.getCommandManager().getCommands().containsKey(commandName)) {
+                    environment.getCommandManager().getCommands().get(commandName).execute(environment, commandArgs); //замучился придумывать гениальную архитектуру
                 } else {
                     System.err.println("Command not found");
                 }

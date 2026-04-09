@@ -30,4 +30,24 @@ public final class Environment {
         this.calibrationManager = new CalibrationManager(instrumentsManager);
         this.maintenanceManager = new MaintenanceManager(instrumentsManager);
     }
+
+    public CommandManager getCommandManager() {
+        return commandManager;
+    }
+
+    public MyReader getReader() {
+        return reader;
+    }
+
+    public InstrumentsManager getInstrumentsManager() {
+        return instrumentsManager;
+    }
+
+    public CalibrationManager getCalibrationManager() {
+        return calibrationManager;
+    }
+
+    public MaintenanceManager getMaintenanceManager() {
+        return maintenanceManager;
+    }
 }
