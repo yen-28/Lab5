@@ -152,11 +152,11 @@ public final class Instrument {
     public String toString() {
         return "Instrument " +
                 "id: " + id + '\n' +
-                " name: " + name + '\n' +
-                " type: " + type + '\n' +
-                " inventoryNumber: " + inventoryNumber + '\n' +
-                " location: " + location + '\n' +
-                " status: " + status + '\n' +
-                " lastCalibration: " + lastCalibration + '\n';
+                "name: " + name + '\n' +
+                "type: " + type + '\n' +
+                "inventoryNumber: " + inventoryNumber + '\n' +
+                "location: " + location + '\n' +
+                "status: " + status + '\n' +
+                "lastCalibration: " + lastCalibration + '\n';
     }
 }

@@ -6,9 +6,6 @@ public final class InstAdd extends Command {
 
     private static final String name = "inst_add";
 
-    /*
-    ВСЁ СДЕЛАТЬ ПО УМУ
-     */
     @Override
     public void execute(Environment environment, String args) {
         String ownerUsername = environment.getReader().readNonEmptyString("Ваше имя: ");
@@ -25,12 +22,9 @@ public final class InstAdd extends Command {
                 "ACTIVE,\n" +
                 "    OUT_OF_SERVICE, \n" + ">");
 
-        environment.getInstrumentsManager().addNew(ownerUsername, name, type, inventoryNumber, location, status);
-        System.out.println("Прибор " + name + " добавлен");
+        long id = environment.getInstrumentsManager().addNew(ownerUsername, name, type, inventoryNumber, location, status);
+        System.out.println("Прибор " + name + " добавлен, ID: " +id);
 
-
-
-//TODO 1 Здесь делаем ввод с помощью ридера
     }
 
     public static String getName() {
@@ -42,8 +36,4 @@ public final class InstAdd extends Command {
         return name + ": добавить новый прибор";
     }
 
-//    @Override
-//    public void checkArgs() {
-//
-//    }
 }
