@@ -12,49 +12,58 @@ public final class InstList extends Command {
     @Override
     public void execute(Environment environment, String args) {
         String[] argsList = environment.getReader().splitArgs(args);
-        String key = argsList[0];
-        String value = argsList[1]; //TODO Где-то ошибка с индексами, может в ридере
 
-        List <Instrument> filtred = environment.getInstrumentsManager().filterInstList(key, value);
+        String key = "";
+        String value = "";
+        List<Instrument> filtred;
 
-        if (filtred.isEmpty()){
-            System.out.println("Список инструментов с выбранным параметром пуст");
+        if (argsList.length == 2) {
+            key = argsList[0];
+            value = argsList[1]; //TODO Где-то ошибка с индексами, может в ридере
+            filtred = environment.getInstrumentsManager().filterInstList(key, value);
+        } else {
+            filtred = environment.getInstrumentsManager().filterInstList(key, value);
+        }
+
+
+        if (filtred.isEmpty()) {
+            throw new IllegalArgumentException("Список инструментов с выбранным параметром пуст");
         }
 
         switch (key) {
             case "--type":
-                System.out.printf("%-5s %-30s %-25s %s%n", "ID", "Name", "Status");
+                System.out.printf("%-5s %-30s %-25s %s%n", "ID", "Name", "Status", "\n");
                 for (Instrument inst : filtred) {
-                    System.out.printf("%-5d %-30s %-25s",
+                    System.out.printf("%-5d %-30s %-25s %s%n",
                             inst.getId(),
                             truncate(inst.getName(), 30),
-                            inst.getStatus()
+                            inst.getStatus(), "\n"
                     );
-                }
+                } break;
             case "--status":
-                System.out.printf("%-5s %-30s %-25s %s%n", "ID", "Name", "Type");
+                System.out.printf("%-5s %-30s %-25s %s%n", "ID", "Name", "Type", "\n");
                 for (Instrument inst : filtred) {
-                    System.out.printf("%-5d %-30s %-25s",
+                    System.out.printf("%-5d %-30s %-25s %s%n",
                             inst.getId(),
                             truncate(inst.getName(), 30),
-                            inst.getType()
+                            inst.getType().toString(), "\n"
                     );
-                }
+                } break;
             default:
-                System.out.printf("%-5s %-30s %-25s %-25s %s%n", "ID", "Name", "Type", "Status");
+                System.out.printf("%-5s %-30s %-25s %-25s %s%n", "ID", "Name", "Type", "Status", "\n");
                 for (Instrument inst : filtred) {
-                    System.out.printf("%-5d %-30s %-25s %-25s",
+                    System.out.printf("%-5d %-30s %-25s %-25s %s%n",
                             inst.getId(),
                             truncate(inst.getName(), 30),
-                            inst.getStatus(),
-                            inst.getStatus()
+                            inst.getType().toString(),
+                            inst.getStatus().toString(), "\n"
                     );
                 }
 
         }
-
-
     }
+
+
     public static String getName() {
         return name;
     }
@@ -62,6 +71,6 @@ public final class InstList extends Command {
 
     @Override
     public String getHelp() {
-        return "Показывает список приборов по определённому типу(--type TYPE)/статусу(--status STATUS)/все()";
+        return name + ": Показывает список приборов по определённому типу(--type TYPE)/статусу(--status STATUS)/все()";
     }
 }
