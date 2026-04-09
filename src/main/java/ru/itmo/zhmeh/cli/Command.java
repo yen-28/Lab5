@@ -15,6 +15,14 @@ public abstract class Command {
         return text.substring(0, maxLength - 3) + "...";
     }
 
+    protected long readId(String sId){
+        try {
+           return Long.parseLong(sId.trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Неверный формат ID",e);
+        }
+    }
+
     //public abstract void checkArgs();//????
 
 //    public boolean getIsInputSeparated() {

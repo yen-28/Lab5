@@ -72,7 +72,7 @@ public final class InstrumentsManager {
 
     }
 
-    public String update(long id, String field, String value){
+    public void update(long id, String field, String value){
         checkInstrumentExistsId(id);
         Instrument inst = instruments.get(id);
 
@@ -90,7 +90,6 @@ public final class InstrumentsManager {
             default:
                 throw new IllegalArgumentException("Ошибка: нельзя изменить поле: " + field);
         }
-        return "OK";
     }
 
     public long remove(Long id){

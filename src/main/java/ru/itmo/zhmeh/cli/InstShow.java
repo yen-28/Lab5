@@ -5,12 +5,7 @@ public final class InstShow extends Command {
 
     @Override
     public void execute(Environment environment, String args) {
-        long id;
-        try {
-            id = Long.parseLong(args.trim());
-        } catch (NumberFormatException e) {
-            throw new RuntimeException(e);
-        }
+        long id = readId(args);
         System.out.println(environment.getInstrumentsManager().getById(id).toString());
     }
 
