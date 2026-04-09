@@ -41,20 +41,20 @@ public final class FieldValidator {
     public static void validateName(String name){
         validateIsStringEmpty(name, StringValidationType.INST_NAME);
         if (name.length() > 128) {
-            throw new IllegalArgumentException("Ошибка: длина больше 128 символов");
+            throw new IllegalArgumentException("Ошибка: длина имени больше 128 символов");
         }
     }
 
     public static void validateInventoryNumber(String inventoryNumber){
         if (inventoryNumber.length() > 32){
-            throw new IllegalArgumentException("Ошибка: длина более 32 символов");
+            throw new IllegalArgumentException("Ошибка: длина номера более 32 символов");
         }
     }
 
     public static void validateLocation(String location){
         validateIsStringEmpty(location, StringValidationType.INST_LOCATION);
         if (location.length() > 64) {
-            throw new IllegalArgumentException("Ошибка: длина больше 64 символов");
+            throw new IllegalArgumentException("Ошибка: длина расположения больше 64 символов");
         }
     }
 
@@ -63,7 +63,7 @@ public final class FieldValidator {
 
     public static void validateComment(String inventoryNumber){
         if (inventoryNumber.length() > 128){
-            throw new IllegalArgumentException("Ошибка: длина более 128 символов");
+            throw new IllegalArgumentException("Ошибка: длина комментария более 128 символов");
         }
     }
 
@@ -73,7 +73,7 @@ public final class FieldValidator {
     public static void validateDetails(String details){
         validateIsStringEmpty(details, StringValidationType.MAINTEN_DETAILS);
         if (details.length() > 128) {
-            throw new IllegalArgumentException("Ошибка: длина больше 128 символов");
+            throw new IllegalArgumentException("Ошибка: длина деталей больше 128 символов");
         }
     }
 }

@@ -19,14 +19,14 @@ public final class InstAdd extends Command {
                 "    SPECTROPHOTOMETER,\n" +
                 "    CONDUCTIVITY_METER,\n" +
                 "    THERMOMETER, \n" + ">");
-        String inventoryNumber = environment.getReader().readString("Введите инвентарный номер: ");
-        String location = environment.getReader().readNonEmptyString("Расположение ");
+        String inventoryNumber = environment.getReader().readString("Инвентарный номер: ");
+        String location = environment.getReader().readNonEmptyString("Расположение: ");
         String status = environment.getReader().readNonEmptyString("Выберите статус прибора: " +
                 "ACTIVE,\n" +
                 "    OUT_OF_SERVICE, \n" + ">");
 
         environment.getInstrumentsManager().addNew(ownerUsername, name, type, inventoryNumber, location, status);
-        System.out.println("Прибор " + name + "добавлен" + "id = ");
+        System.out.println("Прибор " + name + " добавлен");
 
 
 

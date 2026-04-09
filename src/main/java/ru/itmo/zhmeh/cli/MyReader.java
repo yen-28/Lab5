@@ -15,8 +15,12 @@ public final class MyReader {
 
     public String[] splitInput(String input){
         return input.trim().split(" ", 2);
+    }
 
-
+    public String[] splitArgs(String args){
+        if (args != null || !args.isEmpty() ){
+            return args.trim().split(" ");
+        } else return  null;
     }
 
     public String readString(String prompt) {
@@ -24,7 +28,7 @@ public final class MyReader {
         return scanner.nextLine().trim();
     }
 
-    public String readNonEmptyString(String prompt) { //TODO хочу или нет?
+    public String readNonEmptyString(String prompt) {
         while (true) {
             System.out.print(prompt);
             String value = scanner.nextLine().trim();

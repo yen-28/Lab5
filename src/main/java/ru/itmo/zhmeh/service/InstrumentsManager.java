@@ -57,8 +57,19 @@ public final class InstrumentsManager {
         return instruments.get(id);
     }
 
-    public void list() {
-        System.out.println(getInstruments()); //возможно стоит сделать красивее !!
+    public List<Instrument> filterInstList(String key, String value) {
+        switch (key){
+            case "--type":
+                return instruments.values().stream()
+                        .filter(inst -> inst.getType().toString().equalsIgnoreCase(value))
+                        .collect(Collectors.toList());
+            case "--status":
+                return instruments.values().stream()
+                        .filter(inst -> inst.getStatus().toString().equalsIgnoreCase(value))
+                        .collect(Collectors.toList());
+            default: return instruments.values().stream().toList();
+        }
+
     }
 
     public String update(long id, String field, String value){

@@ -17,6 +17,7 @@ public final class Environment {
     private CommandManager addCommands(CommandManager commandManager){
         commandManager.addCommand(InstAdd.getName(), new InstAdd());
         commandManager.addCommand(Help.getName(), new Help());
+        commandManager.addCommand(InstList.getName(), new InstList());
 
         return commandManager;
 
