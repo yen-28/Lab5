@@ -19,7 +19,7 @@ public final class InstList extends Command {
 
         if (argsList.length == 2) {
             key = argsList[0];
-            value = argsList[1]; //TODO Где-то ошибка с индексами, может в ридере
+            value = argsList[1];
             filtred = environment.getInstrumentsManager().filterInstList(key, value);
         } else {
             filtred = environment.getInstrumentsManager().filterInstList(key, value);
@@ -29,6 +29,10 @@ public final class InstList extends Command {
         if (filtred.isEmpty()) {
             throw new IllegalArgumentException("Список инструментов с выбранным параметром пуст");
         }
+
+        /*
+        Да, оно чуть-чуть дублирует инструмент менеджер, но зато нормально работает и без выпендрёжа
+         */
 
         switch (key) {
             case "--type":
