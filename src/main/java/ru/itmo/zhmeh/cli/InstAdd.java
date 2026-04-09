@@ -26,6 +26,7 @@ public final class InstAdd extends Command {
                 "    OUT_OF_SERVICE, \n" + ">");
 
         environment.getInstrumentsManager().addNew(ownerUsername, name, type, inventoryNumber, location, status);
+        System.out.println("Прибор " + name + "добавлен");
 
 
 
