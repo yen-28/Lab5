@@ -1,10 +1,9 @@
 package ru.itmo.zhmeh.cli;
 
+import ru.itmo.zhmeh.cli.commands.*;
 import ru.itmo.zhmeh.service.CalibrationManager;
 import ru.itmo.zhmeh.service.InstrumentsManager;
 import ru.itmo.zhmeh.service.MaintenanceManager;
-
-import java.lang.reflect.Member;
 
 public final class Environment {
     private final MyReader reader;
@@ -20,6 +19,7 @@ public final class Environment {
         commandManager.addCommand(InstList.getName(), new InstList());
         commandManager.addCommand(InstShow.getName(), new InstShow());
         commandManager.addCommand(InstUpdate.getName(), new InstUpdate());
+        commandManager.addCommand(CalAdd.getName(), new CalAdd());
 
         return commandManager;
 

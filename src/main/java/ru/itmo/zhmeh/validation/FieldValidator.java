@@ -1,5 +1,11 @@
 package ru.itmo.zhmeh.validation;
 
+import java.time.DateTimeException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 public final class FieldValidator {
 
 
@@ -37,11 +43,30 @@ public final class FieldValidator {
         }
     }
 
+    public static Instant parseInstant(String instant){
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate localDate = LocalDate.parse(instant.trim(), formatter);
+
+            return localDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        } catch (DateTimeException e){
+            throw new IllegalArgumentException("Неверный формат времени, используйте: YYYY-MM-DD \n");
+        }
+    }
+
+    public static String validateOwnerUsername(String ownerUsername){ //TODO Решить, что надо валидировать
+        if (ownerUsername == null || ownerUsername.isEmpty()) {
+            return "SYSTEM";
+        } else {
+            return ownerUsername;
+        }
+    }
+
     // для инструмента
     public static void validateName(String name){
         validateIsStringEmpty(name, StringValidationType.INST_NAME);
         if (name.length() > 128) {
-            throw new IllegalArgumentException("Ошибка: длина имени больше 128 символов");
+            throw new IllegalArgumentException("Ошибка: длина имени более 128 символов");
         }
     }
 
@@ -57,6 +82,7 @@ public final class FieldValidator {
             throw new IllegalArgumentException("Ошибка: длина расположения больше 64 символов");
         }
     }
+
 
 
     // для калибратора

@@ -117,7 +117,8 @@ public final class Instrument {
     }
 
     public void setOwnerUsername(String ownerUsername) {
-        this.ownerUsername = ownerUsername;
+        this.ownerUsername = FieldValidator.validateOwnerUsername(ownerUsername);
+
     }
 
     public void setUpdatedAt(Instant updatedAt) {

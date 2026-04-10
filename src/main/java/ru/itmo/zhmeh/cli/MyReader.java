@@ -1,5 +1,7 @@
 package ru.itmo.zhmeh.cli;
 
+import ru.itmo.zhmeh.cli.commands.Command;
+
 import java.util.Scanner;
 
 public final class MyReader {
@@ -24,7 +26,7 @@ public final class MyReader {
     }
 
     public String readString(String prompt) {
-        System.out.println(prompt);
+        System.out.print(prompt);
         return scanner.nextLine().trim();
     }
 
@@ -39,16 +41,10 @@ public final class MyReader {
         }
     }
 
-    public long readLong(String prompt){
-        System.out.println(prompt);
+    public long readLongId(String prompt){
+        System.out.print(prompt);
         String value = scanner.nextLine().trim();
-        while (true) {
-            try {
-                return Long.parseLong(value); //есть get? но пусть будет так
-            } catch (NumberFormatException e) {
-                System.out.println("Некорректное число");
-            }
-        }
+        return Command.parseId(value);
 
     }
 

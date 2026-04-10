@@ -25,14 +25,14 @@ public final class Calibration {
     private final Instant createdAt;
 
 
-    public Calibration(long id, String type, long instrumentId, String result, String comment, Instant calibratedAt, String ownerUsername) {
+    public Calibration(long id, String type, long instrumentId, String result, String comment, String calibratedAt, String ownerUsername) {
         this.id = id;
         this.setCalType(type);
         this.instrumentId = instrumentId; //СДЕЛАТЬ
-        this.setResult(result); //+ СПРОСИТЬ ЧТО ЗНАЧИТ РЕЗУЛЬТАТ
+        this.setResult(result);
         this.setComment(comment);
         this.setCalibratedAt(calibratedAt);
-        this.setOwnerUsername(); //!! временно
+        this.setOwnerUsername(ownerUsername);
         this.createdAt = Instant.now();
     }
 
@@ -81,17 +81,17 @@ public final class Calibration {
         this.comment = comment;
     }
 
-    public void setCalibratedAt(Instant calibratedAt) {
-        if (calibratedAt != null) { //Возможно не налл недостаточно
-            this.calibratedAt = calibratedAt;
-        } else {
+    public void setCalibratedAt(String calibratedAt) {
+        if (calibratedAt == null || calibratedAt.isEmpty()) {//Возможно не налл недостаточно
             this.calibratedAt = Instant.now();
-            System.out.println("Время выставлено по умолчанию");
+            System.out.println("Время выставлено по умолчанию: " + getCalibratedAt().toString());
+        } else {
+            this.calibratedAt = FieldValidator.parseInstant(calibratedAt);
         }
     }
 
-    public void setOwnerUsername() {
-        this.ownerUsername = "SYSTEM"; //временно
+    public void setOwnerUsername(String ownerUsername) {
+        this.ownerUsername = FieldValidator.validateOwnerUsername(ownerUsername); //валидация?
     }
 
     public void setCalType(String type) {

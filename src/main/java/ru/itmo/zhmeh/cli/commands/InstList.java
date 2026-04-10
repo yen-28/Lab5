@@ -1,5 +1,6 @@
-package ru.itmo.zhmeh.cli;
+package ru.itmo.zhmeh.cli.commands;
 
+import ru.itmo.zhmeh.cli.Environment;
 import ru.itmo.zhmeh.domain.Instrument;
 
 import java.util.List;

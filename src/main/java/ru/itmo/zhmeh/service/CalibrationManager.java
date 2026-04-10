@@ -26,7 +26,7 @@ public final class CalibrationManager {
         }
     }
 
-    public long addNew(String type, long instrumentId, String result, String comment, Instant calibratedAt, String ownerUsername){
+    public long addNew(String type, long instrumentId, String result, String comment, String calibratedAt, String ownerUsername){
         long id = generateId();
         instrumentsManager.checkInstrumentExistsId(instrumentId);
         if (instrumentsManager.getById(instrumentId).getStatus() == OUT_OF_SERVICE){
@@ -36,7 +36,7 @@ public final class CalibrationManager {
         Calibration calibration = new Calibration(id, type, instrumentId, result, comment, calibratedAt, ownerUsername);
         calibrations.put(id, calibration);
 
-        instrumentsManager.getById(instrumentId).setLastCalibration(calibratedAt);
+        instrumentsManager.getById(instrumentId).setLastCalibration(calibration.getCalibratedAt());
 
         return id;
     }

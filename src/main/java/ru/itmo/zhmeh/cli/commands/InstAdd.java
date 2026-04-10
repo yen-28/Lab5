@@ -1,6 +1,6 @@
-package ru.itmo.zhmeh.cli;
+package ru.itmo.zhmeh.cli.commands;
 
-import ru.itmo.zhmeh.service.InstrumentsManager;
+import ru.itmo.zhmeh.cli.Environment;
 
 public final class InstAdd extends Command {
 
@@ -8,7 +8,7 @@ public final class InstAdd extends Command {
 
     @Override
     public void execute(Environment environment, String args) {
-        String ownerUsername = environment.getReader().readNonEmptyString("Ваше имя: ");
+        String ownerUsername = environment.getReader().readString("Ваше имя: ");
         String name = environment.getReader().readNonEmptyString("Имя прибора: ");
         String type = environment.getReader().readNonEmptyString("Выберите тип прибора:" +
                 " (PH_METER,\n" +
@@ -33,7 +33,7 @@ public final class InstAdd extends Command {
 
     @Override
     public String getHelp() {
-        return name + ": добавить новый прибор";
+        return name + ": добавить новый прибор (интерактивно)";
     }
 
 }

@@ -1,8 +1,8 @@
-package ru.itmo.zhmeh.cli;
+package ru.itmo.zhmeh.cli.commands;
 
-import ru.itmo.zhmeh.cli.CommandManager;
+import ru.itmo.zhmeh.cli.Environment;
 
-public final class Help extends Command{
+public final class Help extends Command {
 
     private static final String name =  "help";
 

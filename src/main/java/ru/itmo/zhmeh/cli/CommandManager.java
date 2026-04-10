@@ -1,5 +1,7 @@
 package ru.itmo.zhmeh.cli;
 
+import ru.itmo.zhmeh.cli.commands.Command;
+
 import java.util.HashMap;
 
 public final class CommandManager {
