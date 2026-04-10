@@ -12,13 +12,13 @@ public final class CalAdd extends Command{
                 "    ONE_POINT,\n" +
                 "    TWO_POINT \n" +
                 "> ");
-        long instrumenId = environment.getReader().readLongId("Введите ID прибора: ");
+        long instrumentId = environment.getReader().readLongId("Введите ID прибора: ");
         String result = environment.getReader().readNonEmptyString("Введите результат (OK или FAIL): ");
         String comment = environment.getReader().readString("Введите комментарий: ");
         String calibratedAt = environment.getReader().readString("Введите время калибровки (в формате YYYY-MM-DD): ");
         String ownerUsername = environment.getReader().readString("Введите имя пользователя (по умолчанию - SYSTEM): ");
 
-        long id = environment.getCalibrationManager().addNew(type, instrumenId, result, comment, calibratedAt, ownerUsername);
+        long id = environment.getCalibrationManager().addNew(type, instrumentId, result, comment, calibratedAt, ownerUsername);
         System.out.println("Калибровка добавленa, ID: " + id);
     }
 

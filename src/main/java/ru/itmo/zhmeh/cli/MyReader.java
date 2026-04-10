@@ -6,9 +6,6 @@ import java.util.Scanner;
 
 public final class MyReader {
 
-//    private String commandName;
-//    public String[] commandArgs;
-
     private final Scanner scanner;
 
     public MyReader(Scanner scanner) {
