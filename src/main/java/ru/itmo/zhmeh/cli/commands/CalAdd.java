@@ -8,11 +8,12 @@ public final class CalAdd extends Command{
 
     @Override
     public void execute(Environment environment, String args) {
+        long instrumentId = parseId(args);
+
         String type = environment.getReader().readNonEmptyString("Введите тип: \n" +
                 "    ONE_POINT,\n" +
                 "    TWO_POINT \n" +
                 "> ");
-        long instrumentId = environment.getReader().readLongId("Введите ID прибора: ");
         String result = environment.getReader().readNonEmptyString("Введите результат (OK или FAIL): ");
         String comment = environment.getReader().readString("Введите комментарий: ");
         String calibratedAt = environment.getReader().readString("Введите время калибровки (в формате YYYY-MM-DD): ");
