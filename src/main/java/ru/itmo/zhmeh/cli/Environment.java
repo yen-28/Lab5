@@ -23,6 +23,7 @@ public final class Environment {
         commandManager.addCommand(CalList.getName(), new CalList());
         commandManager.addCommand(CalShow.getName(), new CalShow());
         commandManager.addCommand(MaintAdd.getName(), new MaintAdd());
+        commandManager.addCommand(MaintList.getName(), new MaintList());
         return commandManager;
 
     }

@@ -5,6 +5,7 @@ import ru.itmo.zhmeh.domain.Maintenance;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -30,11 +31,17 @@ public final class MaintenanceManager {
         return id;
     }
 
-    public Collection<Maintenance> getMaintenancesListByInstId(long instId){
+    public List<Maintenance> getMaintenancesListByInstId(long instId, String key, long value){
         instrumentsManager.checkInstrumentExistsId(instId);
-        return maintenances.values().stream()
+        List<Maintenance> instMaint =  maintenances.values().stream()
                 .filter(maint -> maint.getInstrumentId() == instId)
-                .collect(Collectors.toList());
+                .toList();
+        if (key.equalsIgnoreCase("--last")){
+            return instMaint.stream()
+                    .filter(maint -> maint.getId() <= value) //TODO !ОНО БУДЕТ ТАКЖЕ ПЛОХО РАБОТАТЬ, КАК И В КАЛИБРАТОРЕ!
+                    .toList();
+        }
+        else return instMaint;
     }
 
 
