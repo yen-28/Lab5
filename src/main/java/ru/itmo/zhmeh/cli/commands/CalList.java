@@ -6,7 +6,7 @@ import ru.itmo.zhmeh.domain.Instrument;
 
 import java.util.List;
 
-public final class CalList extends Command {
+public final class CalList extends Command { //TODO КАК-ТО РЕШИТЬ ВОПРОС С id КАЛИБРОВКИ (ПРИ НЕУДАЧНОМ СОЗДАНИИ id ЗАНИМАЕТСЯ, ПОСЛЕДНИЕ N ПОКАЗЫВАЕТ НЕПРАВИЛЬНО)
 
     private static final String name = "cal_list";
 

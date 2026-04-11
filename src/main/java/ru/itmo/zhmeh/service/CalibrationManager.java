@@ -23,6 +23,12 @@ public final class CalibrationManager {
         }
     }
 
+    public Calibration getById(long id){
+        if (calibrations.containsKey(id)){
+            return calibrations.get(id);
+        } else throw new IllegalArgumentException("Калибровка с ID: " + id + " не найдена");
+    }
+
     public long addNew(String type, long instrumentId, String result, String comment, String calibratedAt, String ownerUsername){
         long id = nextId++;
         instrumentsManager.checkInstrumentExistsId(instrumentId);
