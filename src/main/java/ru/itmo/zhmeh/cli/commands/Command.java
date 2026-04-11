@@ -32,7 +32,9 @@ public abstract class Command {
     }
 
     public static String dateFormater(Instant instant){
-        return instant.atZone(ZoneId.systemDefault()).toLocalDate().toString();
+        if (instant == null) {
+            return "-";
+        } else return instant.atZone(ZoneId.systemDefault()).toLocalDate().toString();
     }
 
     //public abstract void checkArgs();//????

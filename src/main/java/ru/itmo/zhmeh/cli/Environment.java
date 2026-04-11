@@ -24,6 +24,7 @@ public final class Environment {
         commandManager.addCommand(CalShow.getName(), new CalShow());
         commandManager.addCommand(MaintAdd.getName(), new MaintAdd());
         commandManager.addCommand(MaintList.getName(), new MaintList());
+        commandManager.addCommand(InstDue.getName(), new InstDue());
         return commandManager;
 
     }
