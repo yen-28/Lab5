@@ -30,7 +30,7 @@ public final class Maintenance {
         this.doneAt = Instant.now();
     }
 
-    public Maintenance(long id, long instrumentId, String type, String details, Instant doneAt, String ownerUsername) {
+    public Maintenance(long id, long instrumentId, String type, String details, String doneAt, String ownerUsername) {
         this.createdAt = Instant.now();
         this.id = id;
         this.instrumentId = instrumentId;
@@ -80,15 +80,17 @@ public final class Maintenance {
         this.details = details;
     }
 
-    public void setDoneAt(Instant doneAt) {
-        if (doneAt != null) { //возможно налл не достаточно
-            this.doneAt = doneAt;
-        } else { this.doneAt = Instant.now();
-        System.out.println("Время выставлено по умолчанию");}
+    public void setDoneAt(String doneAt) {
+        if (doneAt == null || doneAt.isEmpty()) { //возможно налл не достаточно
+            this.doneAt = Instant.now();
+            System.out.println("Время выставлено по умолчанию");
+        } else {
+            this.doneAt = FieldValidator.parseInstant(doneAt);
+        }
     }
 
     public void setOwnerUsername(String ownerUsername) {
-        this.ownerUsername = "SYSTEM"; //ВРЕМЕННО
+        this.ownerUsername = FieldValidator.validateOwnerUsername(ownerUsername);
     }
 
     @Override

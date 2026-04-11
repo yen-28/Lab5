@@ -30,11 +30,13 @@ public final class CalibrationManager {
     }
 
     public long addNew(String type, long instrumentId, String result, String comment, String calibratedAt, String ownerUsername){
-        long id = nextId++;
         instrumentsManager.checkInstrumentExistsId(instrumentId);
+
         if (instrumentsManager.getById(instrumentId).getStatus() == OUT_OF_SERVICE){
             throw new IllegalArgumentException("Ошибка: прибор не в работе");
         }
+
+        long id = nextId++;
 
         Calibration calibration = new Calibration(id, type, instrumentId, result, comment, calibratedAt, ownerUsername);
         calibrations.put(id, calibration);

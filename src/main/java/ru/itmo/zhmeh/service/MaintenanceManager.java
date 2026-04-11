@@ -18,11 +18,13 @@ public final class MaintenanceManager {
         this.instrumentsManager = instrumentsManager;
     }
 
-    public long addNew(long instrumentId, String type, String details, Instant doneAt, String ownerUsername){
-        long id = nextId++;
+    public long addNew(long instrumentId, String type, String details, String doneAt, String ownerUsername){
+
         instrumentsManager.checkInstrumentExistsId(instrumentId);
 
+        long id = nextId++;
         Maintenance maintenance = new Maintenance(id, instrumentId, type, details, doneAt, ownerUsername);
+
         maintenances.put(id, maintenance);
 
         return id;
