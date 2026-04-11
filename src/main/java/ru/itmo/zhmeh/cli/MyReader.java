@@ -19,7 +19,7 @@ public final class MyReader {
     public String[] splitArgs(String args){
         if (args != null || !args.isEmpty() ){
             return args.trim().split(" ");
-        } else return  null;
+        } else return  null; //TODO норм/не норм?
     }
 
     public String readString(String prompt) {

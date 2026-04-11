@@ -2,19 +2,16 @@ package ru.itmo.zhmeh.service;
 
 import ru.itmo.zhmeh.domain.Calibration;
 
-import java.time.Instant;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static ru.itmo.zhmeh.domain.InstrumentStatus.OUT_OF_SERVICE;
-import static ru.itmo.zhmeh.service.IdGenerator.generateId;
 
 public final class CalibrationManager {
     private final Map<Long, Calibration> calibrations = new HashMap<>();//квен порекомендовал меп на всякий случай
     private final InstrumentsManager instrumentsManager;
+    private long nextId = 1;
 
     public CalibrationManager(InstrumentsManager instrumentsManager) {
         this.instrumentsManager = instrumentsManager;
@@ -27,7 +24,7 @@ public final class CalibrationManager {
     }
 
     public long addNew(String type, long instrumentId, String result, String comment, String calibratedAt, String ownerUsername){
-        long id = generateId();
+        long id = nextId++;
         instrumentsManager.checkInstrumentExistsId(instrumentId);
         if (instrumentsManager.getById(instrumentId).getStatus() == OUT_OF_SERVICE){
             throw new IllegalArgumentException("Ошибка: прибор не в работе");
@@ -41,11 +38,18 @@ public final class CalibrationManager {
         return id;
     }
 
-    public List<Calibration> getCalibrationsListByInstId(long InstId){ //TODO последние N ???
+    public List<Calibration> getCalibrationsListByInstId(long InstId, String key, long value){ //TODO насколько норм делать обработку ключа здесь?
         instrumentsManager.checkInstrumentExistsId(InstId);
-        return calibrations.values().stream()
-                .filter(cal -> cal.getInstrumentId() == InstId)
-                .collect(Collectors.toList());
+        List<Calibration> instCals =  calibrations.values().stream()
+                .filter(cal -> cal.getInstrumentId() == InstId )
+                .toList();
+        if (key.equalsIgnoreCase("--last")){
+            return  instCals.stream()
+                    .filter(cal -> cal.getId() <= value) //id же разные
+                    .toList();
+
+        }
+        else return instCals;
     }
 
 

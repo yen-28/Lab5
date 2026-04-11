@@ -2,6 +2,10 @@ package ru.itmo.zhmeh.cli.commands;
 
 import ru.itmo.zhmeh.cli.Environment;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+
 public abstract class Command {
 
 
@@ -25,6 +29,10 @@ public abstract class Command {
                 throw new IllegalArgumentException("Неверный формат ID", e);
             }
         }
+    }
+
+    public static String dateFormater(Instant instant){
+        return instant.atZone(ZoneId.systemDefault()).toLocalDate().toString();
     }
 
     //public abstract void checkArgs();//????

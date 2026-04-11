@@ -12,12 +12,14 @@ public final class MaintenanceManager {
     private final Map<Long, Maintenance> maintenances = new HashMap<>();
     private final InstrumentsManager instrumentsManager;
 
+    private long nextId = 1;
+
     public MaintenanceManager(InstrumentsManager instrumentsManager) {
         this.instrumentsManager = instrumentsManager;
     }
 
     public long addNew(long instrumentId, String type, String details, Instant doneAt, String ownerUsername){
-        long id = IdGenerator.generateId();
+        long id = nextId++;
         instrumentsManager.checkInstrumentExistsId(instrumentId);
 
         Maintenance maintenance = new Maintenance(id, instrumentId, type, details, doneAt, ownerUsername);
