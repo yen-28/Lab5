@@ -1,5 +1,6 @@
 package ru.itmo.zhmeh.domain;
 
+import ru.itmo.zhmeh.cli.commands.Command;
 import ru.itmo.zhmeh.validation.FieldValidator;
 
 import java.time.Instant;
@@ -158,6 +159,6 @@ public final class Instrument {
                 "inventoryNumber: " + inventoryNumber + '\n' +
                 "location: " + location + '\n' +
                 "status: " + status + '\n' +
-                "lastCalibration: " + lastCalibration + '\n';
+                "lastCalibration: " + Command.dateFormater(lastCalibration) + '\n';
     }
 }

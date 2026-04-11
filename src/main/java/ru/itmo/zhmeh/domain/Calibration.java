@@ -1,5 +1,6 @@
 package ru.itmo.zhmeh.domain;
 
+import ru.itmo.zhmeh.cli.commands.Command;
 import ru.itmo.zhmeh.validation.FieldValidator;
 
 import java.time.Instant;
@@ -117,6 +118,6 @@ public final class Calibration {
                 " type: " + type + '\n' +
                 " result: " + result + '\n' +
                 " comment: '" + comment + "' \n" +
-                " calibratedAt: " + calibratedAt;
+                " calibratedAt: " + Command.dateFormater(calibratedAt) + '\n';
     }
 }

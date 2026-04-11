@@ -1,5 +1,6 @@
 package ru.itmo.zhmeh.domain;
 
+import ru.itmo.zhmeh.cli.commands.Command;
 import ru.itmo.zhmeh.validation.FieldValidator;
 
 import java.time.Instant;
@@ -103,14 +104,13 @@ public final class Maintenance {
 
     @Override
     public String toString() {
-        return "Maintenance{" +
-                "id=" + id +
-                ", instrumentId=" + instrumentId +
-                ", type=" + type +
-                ", details='" + details + '\'' +
-                ", doneAt=" + doneAt +
-                ", ownerUsername='" + ownerUsername + '\'' +
-                ", createdAt=" + createdAt +
-                '}';
+        return "Maintenance " +
+                "id: " + id + '\n' +
+                " instrumentId: " + instrumentId + '\n' +
+                " type: " + type + '\n' +
+                " details: '" + details + '\'' + '\n' +
+                " doneAt: " + Command.dateFormater(doneAt) + '\n' +
+                " ownerUsername: '" + ownerUsername + '\'' + '\n' +
+                " createdAt: " + Command.dateFormater(createdAt) + '\n';
     }
 }
