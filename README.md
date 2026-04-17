@@ -76,3 +76,6 @@ java -jar target/Lab5-1.0-SNAPSHOT.jar
 
 - Артём Тимошин, группа О3144
 - ITMO University, НОЦ «Инфохимия», 2026
+
+## Документация
+- Lab5\target\site\apidocs\index.html
