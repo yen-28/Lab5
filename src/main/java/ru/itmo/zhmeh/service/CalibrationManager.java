@@ -1,12 +1,30 @@
 package ru.itmo.zhmeh.service;
 
 import ru.itmo.zhmeh.domain.Calibration;
+import ru.itmo.zhmeh.domain.Instrument;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static ru.itmo.zhmeh.domain.InstrumentStatus.OUT_OF_SERVICE;
+
+/**
+ * Сервис для управления калибровками (Calibration).
+ * <p>
+ * Отвечает за:
+ * <ul>
+ *   <li>Создание и добавление калибровок в коллекцию</li>
+ *   <li>Валидацию данных перед сохранением</li>
+ *   <li>Поиск калибровок</li>
+ * </ul>
+ * <p>
+ * Данные хранятся в памяти в HashMap<Long, Instrument>.
+ * Генерация ID осуществляется автоматически.
+ *
+ * @see Calibration
+ * @see InstrumentsManager
+ */
 
 public final class CalibrationManager {
     private final Map<Long, Calibration> calibrations = new HashMap<>();//квен порекомендовал меп на всякий случай

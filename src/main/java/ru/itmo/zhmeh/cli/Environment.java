@@ -5,6 +5,25 @@ import ru.itmo.zhmeh.service.CalibrationManager;
 import ru.itmo.zhmeh.service.InstrumentsManager;
 import ru.itmo.zhmeh.service.MaintenanceManager;
 
+/**
+ * Класс, хранящий в себе все, что требуется для работы программы
+ * <p>
+ * Содержит:
+ * <ol>
+ *     <li> MyReader - для чтения из строки </li>
+ *     <li> Менеджеры каждой сущности - для хранения коллекций и работы с ними</li>
+ *     <li> CommandManager - для хранения списка команд</li>
+ * </ol>
+ * @see MyReader
+ * @see CommandManager
+ * @see InstrumentsManager
+ * @see CalibrationManager
+ * @see MaintenanceManager
+ * </p>
+ *
+ *
+ */
+
 public final class Environment {
     private final MyReader reader;
     private final CommandManager commandManager;

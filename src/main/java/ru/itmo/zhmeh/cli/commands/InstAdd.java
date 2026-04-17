@@ -2,6 +2,22 @@ package ru.itmo.zhmeh.cli.commands;
 
 import ru.itmo.zhmeh.cli.Environment;
 
+/**
+ * Команда добавления прибора (inst_add).
+ * <p>
+ * Работает в интерактивном режиме:
+ * <ol>
+ *   <li>Запрашивает название прибора</li>
+ *   <li>Запрашивает тип из списка InstrumentType</li>
+ *   <li>Запрашивает инвентарный номер</li>
+ *   <li>Запрашивает место нахождения</li>
+ * </ol>
+ * <p>
+ * После ввода всех полей вызывает InstrumentService.addInstrument().
+ *
+ * @see ru.itmo.zhmeh.service.InstrumentsManager
+ * @see Environment
+ */
 public final class InstAdd extends Command {
 
     private static final String name = "inst_add";

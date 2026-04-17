@@ -10,8 +10,21 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/*
-К КАЖДОМУ МЕТОДУ ДОБАВИТЬ ВЫВОД О ЗАВЕРШЕНИИ? ++
+/**
+ * Сервис для управления приборами (Instrument).
+ * <p>
+ * Отвечает за:
+ * <ul>
+ *   <li>Создание и добавление приборов в коллекцию</li>
+ *   <li>Валидацию данных перед сохранением</li>
+ *   <li>Поиск, обновление и удаление приборов</li>
+ * </ul>
+ * <p>
+ * Данные хранятся в памяти в HashMap<Long, Instrument>.
+ * Генерация ID осуществляется автоматически.
+ *
+ * @see Instrument
+ * @see CalibrationManager
  */
 public final class InstrumentsManager {
     private final Map<Long, Instrument> instruments = new HashMap<>(); //квен порекомендовал меп на всякий случай
@@ -42,6 +55,23 @@ public final class InstrumentsManager {
             throw new IllegalArgumentException("Ошибка: инвентарный номер: " + number + " занят");
         }
     }
+
+    /**
+     * Добавить новый прибор в коллекцию.
+     * <p>
+     * Выполняет валидацию всех полей перед созданием объекта.
+     * Если валидация не пройдена — выбрасывает IllegalArgumentException.
+     *
+     * @param name название прибора (не пустое, макс. 128 символов)
+     * @param type тип прибора из InstrumentType
+     * @param inventoryNumber инвентарный номер (можно пустой, макс. 32 символа)
+     * @param location место нахождения (не пустое, макс. 64 символа)
+     * @param status статус прибора (ACTIVE или OUT_OF_SERVICE)
+     * @param ownerUsername логин владельца (не пустой)
+     * @return ID созданного прибора
+     * @throws IllegalArgumentException если поле не прошло валидацию
+     * @see ru.itmo.zhmeh.validation.FieldValidator
+     */
     public long addNew(String ownerUsername, String name, String type, String inventoryNumber, String location, String status){
         validateInventoryNumber(inventoryNumber);
 

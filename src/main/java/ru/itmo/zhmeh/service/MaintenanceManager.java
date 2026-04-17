@@ -1,5 +1,6 @@
 package ru.itmo.zhmeh.service;
 
+import ru.itmo.zhmeh.domain.Calibration;
 import ru.itmo.zhmeh.domain.Maintenance;
 
 import java.time.Instant;
@@ -8,6 +9,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+/**
+ * Сервис для управления калибровками (Calibration).
+ * <p>
+ * Отвечает за:
+ * <ul>
+ *   <li>Создание и добавление калибровок в коллекцию</li>
+ *   <li>Валидацию данных перед сохранением</li>
+ *   <li>Поиск калибровок</li>
+ * </ul>
+ * <p>
+ * Данные хранятся в памяти в HashMap<Long, Instrument>.
+ * Генерация ID осуществляется автоматически.
+ *
+ * @see Calibration
+ * @see InstrumentsManager
+ */
 
 public final class MaintenanceManager {
     private final Map<Long, Maintenance> maintenances = new HashMap<>();
@@ -18,6 +36,7 @@ public final class MaintenanceManager {
     public MaintenanceManager(InstrumentsManager instrumentsManager) {
         this.instrumentsManager = instrumentsManager;
     }
+
 
     public long addNew(long instrumentId, String type, String details, String doneAt, String ownerUsername){
 
