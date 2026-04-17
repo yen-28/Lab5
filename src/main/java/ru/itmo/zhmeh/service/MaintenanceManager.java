@@ -23,12 +23,17 @@ public final class MaintenanceManager {
 
         instrumentsManager.checkInstrumentExistsId(instrumentId);
 
-        long id = nextId++;
-        Maintenance maintenance = new Maintenance(id, instrumentId, type, details, doneAt, ownerUsername);
 
-        maintenances.put(id, maintenance);
+        if (maintenances.containsKey(nextId)) {
+            nextId++;// если предыдущий не занят, то занять его!!!
+        }
 
-        return id;
+
+        Maintenance maintenance = new Maintenance(nextId, instrumentId, type, details, doneAt, ownerUsername);
+
+        maintenances.put(nextId, maintenance);
+
+        return nextId;
     }
 
     public List<Maintenance> getMaintenancesListByInstId(long instId, String key, long value){

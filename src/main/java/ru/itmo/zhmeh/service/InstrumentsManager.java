@@ -44,11 +44,17 @@ public final class InstrumentsManager {
     }
     public long addNew(String ownerUsername, String name, String type, String inventoryNumber, String location, String status){
         validateInventoryNumber(inventoryNumber);
-        long id = nextId++;
-        Instrument instrument = new Instrument(id, ownerUsername, name, type, inventoryNumber, location, status);
-        instruments.put(id, instrument);
 
-        return id;
+
+        if (instruments.containsKey(nextId)) {
+            nextId++;//TODO если предыдущий не занят, то занять его!!!
+        }
+
+
+        Instrument instrument = new Instrument(nextId, ownerUsername, name, type, inventoryNumber, location, status);
+        instruments.put(nextId, instrument);
+
+        return nextId;
     }
 
     public Instrument getById(long id){

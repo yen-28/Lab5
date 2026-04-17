@@ -36,14 +36,19 @@ public final class CalibrationManager {
             throw new IllegalArgumentException("Ошибка: прибор не в работе");
         }
 
-        long id = nextId++;
 
-        Calibration calibration = new Calibration(id, type, instrumentId, result, comment, calibratedAt, ownerUsername);
-        calibrations.put(id, calibration);
+
+        if (calibrations.containsKey(nextId)) {
+            nextId++; // если предыдущий не занят, то занять его!!!
+        }
+
+
+        Calibration calibration = new Calibration(nextId, type, instrumentId, result, comment, calibratedAt, ownerUsername);
+        calibrations.put(nextId, calibration);
 
         instrumentsManager.getById(instrumentId).setLastCalibration(calibration.getCalibratedAt());
 
-        return id;
+        return nextId;
     }
 
     public List<Calibration> getCalibrationsListByInstId(long InstId, String key, long value){ //TODO насколько норм делать обработку ключа здесь?
