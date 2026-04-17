@@ -43,7 +43,7 @@ public final class MaintenanceManager {
                 .toList();
         if (key.equalsIgnoreCase("--last")){
             return instMaint.stream()
-                    .filter(maint -> maint.getId() <= value) //TODO !ОНО БУДЕТ ТАКЖЕ ПЛОХО РАБОТАТЬ, КАК И В КАЛИБРАТОРЕ!
+                    .filter(maint -> maint.getId() <= value)
                     .toList();
         }
         else return instMaint;

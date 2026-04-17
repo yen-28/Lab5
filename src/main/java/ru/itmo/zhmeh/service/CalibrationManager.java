@@ -58,7 +58,7 @@ public final class CalibrationManager {
                 .toList();
         if (key.equalsIgnoreCase("--last")){
             return  instCals.stream()
-                    .filter(cal -> cal.getId() <= value) //TODO !ОНО ПЛОХО РАБОТАЕТ!
+                    .filter(cal -> cal.getId() <= value)
                     .toList();
         }
         else return instCals;
