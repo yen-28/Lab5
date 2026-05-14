@@ -3,6 +3,7 @@ package ru.itmo.zhmeh.cli.commands;
 import ru.itmo.zhmeh.cli.Environment;
 import ru.itmo.zhmeh.storage.DataContainer;
 import ru.itmo.zhmeh.storage.StorageException;
+import ru.itmo.zhmeh.validation.PathValidator;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -13,12 +14,10 @@ public final class Save extends Command {
 
     @Override
     public void execute(Environment environment, String args) {
-//        if (args.length() != 1) {
-//            throw new IllegalArgumentException("Неверный формат пути, укажите корректный путь к файлу");
-//        }
+
+        Path path = PathValidator.validateStrPath(args);
 
         try {
-            Path path = Path.of(args.substring(1, args.length() - 1)); // обрезали < >
 
             DataContainer container = new DataContainer();
             container.setInstruments(new ArrayList<>(environment.getInstrumentsManager().getColInstruments())); // Collection??

@@ -2,12 +2,14 @@ package ru.itmo.zhmeh.cli.commands;
 
 import ru.itmo.zhmeh.cli.Environment;
 
-public class Load extends Command{
+public final class Load extends Command{
     private static final String name = "load";
 
 
     @Override
     public void execute(Environment environment, String args) {
+
+
 
 
 
