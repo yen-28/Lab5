@@ -1,0 +1,44 @@
+package ru.itmo.zhmeh.cli.commands;
+
+import ru.itmo.zhmeh.cli.Environment;
+import ru.itmo.zhmeh.storage.DataContainer;
+import ru.itmo.zhmeh.storage.StorageException;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collection;
+
+public final class Save extends Command {
+    private static final String name = "save";
+
+    @Override
+    public void execute(Environment environment, String args) {
+//        if (args.length() != 1) {
+//            throw new IllegalArgumentException("Неверный формат пути, укажите корректный путь к файлу");
+//        }
+
+        try {
+            Path path = Path.of(args.substring(1, args.length() - 1)); // обрезали < >
+
+            DataContainer container = new DataContainer();
+            container.setInstruments(new ArrayList<>(environment.getInstrumentsManager().getColInstruments())); // Collection??
+            container.setCalibrations(new ArrayList<>(environment.getCalibrationManager().getColCalibrations()));
+            container.setMaintenances(new ArrayList<>(environment.getMaintenanceManager().getColMaintenance()));
+
+            environment.getDataStorage().save(container, path);
+            System.out.println("Данные сохранены в " + path); //
+
+        } catch (StorageException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    @Override
+    public String getHelp() {
+        return name + ": сохранить данные";
+    }
+}

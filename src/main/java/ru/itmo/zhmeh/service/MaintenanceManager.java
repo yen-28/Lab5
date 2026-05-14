@@ -68,6 +68,10 @@ public final class MaintenanceManager {
         else return instMaint;
     }
 
+    public Collection<Maintenance> getColMaintenance() {
+        return maintenances.values();
+    }
+
 
 
 

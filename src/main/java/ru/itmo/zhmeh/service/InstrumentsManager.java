@@ -4,10 +4,7 @@ import ru.itmo.zhmeh.domain.Instrument;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -145,7 +142,9 @@ public final class InstrumentsManager {
     }
 
 
-
+    public Collection<Instrument> getColInstruments() {
+        return instruments.values();
+    }
 
     public Map<Long, Instrument> getInstruments() {
         return instruments;

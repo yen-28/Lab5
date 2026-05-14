@@ -3,6 +3,7 @@ package ru.itmo.zhmeh.service;
 import ru.itmo.zhmeh.domain.Calibration;
 import ru.itmo.zhmeh.domain.Instrument;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,6 +81,10 @@ public final class CalibrationManager {
                     .toList();
         }
         else return instCals;
+    }
+
+    public Collection<Calibration> getColCalibrations(){
+        return calibrations.values();
     }
 
 
