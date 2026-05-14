@@ -44,13 +44,20 @@ public final class FieldValidator {
     }
 
     public static Instant parseInstant(String instant){
+
+        try {
+            return Instant.parse(instant);
+        } catch (DateTimeException ignored) {
+
+        }
+        // если не ISO, то пробуем дальше
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate localDate = LocalDate.parse(instant.trim(), formatter);
 
             return localDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
         } catch (DateTimeException e){
-            throw new IllegalArgumentException("Неверный формат времени, используйте: YYYY-MM-DD \n");
+            throw new IllegalArgumentException("Неверный формат времени, используйте: YYYY-MM-DD или ISO-8601 (например, 2026-04-17T22:30:00Z)\n");
         }
     }
 
