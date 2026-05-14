@@ -50,6 +50,8 @@ public final class Environment {
         commandManager.addCommand(MaintList.getName(), new MaintList());
         commandManager.addCommand(InstDue.getName(), new InstDue());
         commandManager.addCommand(Save.getName(), new Save());
+        commandManager.addCommand(Load.getName(), new Load());
+
         return commandManager;
 
     }

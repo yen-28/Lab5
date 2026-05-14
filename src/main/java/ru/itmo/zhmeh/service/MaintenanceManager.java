@@ -1,6 +1,7 @@
 package ru.itmo.zhmeh.service;
 
 import ru.itmo.zhmeh.domain.Calibration;
+import ru.itmo.zhmeh.domain.Instrument;
 import ru.itmo.zhmeh.domain.Maintenance;
 
 import java.time.Instant;
@@ -38,7 +39,7 @@ public final class MaintenanceManager {
     }
 
 
-    public long addNew(long instrumentId, String type, String details, String doneAt, String ownerUsername){
+    public long addNew(long instrumentId, String type, String details, String doneAt, String ownerUsername) {
 
         instrumentsManager.checkInstrumentExistsId(instrumentId);
 
@@ -55,25 +56,40 @@ public final class MaintenanceManager {
         return nextId;
     }
 
-    public List<Maintenance> getMaintenancesListByInstId(long instId, String key, long value){
+    public List<Maintenance> getMaintenancesListByInstId(long instId, String key, long value) {
         instrumentsManager.checkInstrumentExistsId(instId);
-        List<Maintenance> instMaint =  maintenances.values().stream()
+        List<Maintenance> instMaint = maintenances.values().stream()
                 .filter(maint -> maint.getInstrumentId() == instId)
                 .toList();
-        if (key.equalsIgnoreCase("--last")){
+        if (key.equalsIgnoreCase("--last")) {
             return instMaint.stream()
                     .filter(maint -> maint.getId() <= value)
                     .toList();
+        } else return instMaint;
+    }
+
+    public void replaceAll(List<Maintenance> loadedList) {
+        maintenances.clear(); // очистить всё
+
+        for (Maintenance maint : loadedList) { // заполнить новыми
+            maintenances.put(maint.getId(), maint);
         }
-        else return instMaint;
+
+        // обновить счётчик ID
+        if (!loadedList.isEmpty()) {
+            long maxLoadedId = loadedList.stream()
+                    .mapToLong(Maintenance::getId)
+                    .max()
+                    .orElse(0);
+            this.nextId = maxLoadedId + 1;
+        } else {
+            this.nextId = 1; // Сброс, если загрузили пустой файл
+        }
     }
 
     public Collection<Maintenance> getColMaintenance() {
         return maintenances.values();
     }
-
-
-
 
 
 }

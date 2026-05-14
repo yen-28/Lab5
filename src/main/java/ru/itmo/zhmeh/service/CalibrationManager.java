@@ -36,25 +36,24 @@ public final class CalibrationManager {
         this.instrumentsManager = instrumentsManager;
     }
 
-    public void checkCalibrationExistsId(long id){ //паблик на всякий случай, вдруг надо будет
-        if (!calibrations.containsKey(id)){
+    public void checkCalibrationExistsId(long id) { //паблик на всякий случай, вдруг надо будет
+        if (!calibrations.containsKey(id)) {
             throw new IllegalArgumentException("Ошибка: калибровка с id: " + id + " не найдена");
         }
     }
 
-    public Calibration getById(long id){
-        if (calibrations.containsKey(id)){
+    public Calibration getById(long id) {
+        if (calibrations.containsKey(id)) {
             return calibrations.get(id);
         } else throw new IllegalArgumentException("Калибровка с ID: " + id + " не найдена");
     }
 
-    public long addNew(String type, long instrumentId, String result, String comment, String calibratedAt, String ownerUsername){
+    public long addNew(String type, long instrumentId, String result, String comment, String calibratedAt, String ownerUsername) {
         instrumentsManager.checkInstrumentExistsId(instrumentId);
 
-        if (instrumentsManager.getById(instrumentId).getStatus() == OUT_OF_SERVICE){
+        if (instrumentsManager.getById(instrumentId).getStatus() == OUT_OF_SERVICE) {
             throw new IllegalArgumentException("Ошибка: прибор не в работе");
         }
-
 
 
         if (calibrations.containsKey(nextId)) {
@@ -70,29 +69,40 @@ public final class CalibrationManager {
         return nextId;
     }
 
-    public List<Calibration> getCalibrationsListByInstId(long InstId, String key, long value){ //TODO насколько норм делать обработку ключа здесь?
+    public List<Calibration> getCalibrationsListByInstId(long InstId, String key, long value) { //TODO насколько норм делать обработку ключа здесь?
         instrumentsManager.checkInstrumentExistsId(InstId);
-        List<Calibration> instCals =  calibrations.values().stream()
-                .filter(cal -> cal.getInstrumentId() == InstId )
+        List<Calibration> instCals = calibrations.values().stream()
+                .filter(cal -> cal.getInstrumentId() == InstId)
                 .toList();
-        if (key.equalsIgnoreCase("--last")){
-            return  instCals.stream()
+        if (key.equalsIgnoreCase("--last")) {
+            return instCals.stream()
                     .filter(cal -> cal.getId() <= value)
                     .toList();
-        }
-        else return instCals;
+        } else return instCals;
     }
 
-    public Collection<Calibration> getColCalibrations(){
+    public void replaceAll(List<Calibration> loadedList) {
+        calibrations.clear(); // очистить всё
+
+        for (Calibration cal : loadedList) { // заполнить новыми
+            calibrations.put(cal.getId(), cal);
+        }
+
+        // обновить счётчик ID
+        if (!loadedList.isEmpty()) {
+            long maxLoadedId = loadedList.stream()
+                    .mapToLong(Calibration::getId)
+                    .max()
+                    .orElse(0);
+            this.nextId = maxLoadedId + 1;
+        } else {
+            this.nextId = 1; // Сброс, если загрузили пустой файл
+        }
+    }
+
+    public Collection<Calibration> getColCalibrations() {
         return calibrations.values();
     }
-
-
-
-
-
-
-
 
 
 }

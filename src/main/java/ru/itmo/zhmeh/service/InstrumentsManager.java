@@ -28,8 +28,8 @@ public final class InstrumentsManager {
 
     private long nextId = 1;
 
-    public void checkInstrumentExistsId(long id){ //паблик на всякий случай, вдруг надо будет
-        if (!instruments.containsKey(id)){
+    public void checkInstrumentExistsId(long id) { //паблик на всякий случай, вдруг надо будет
+        if (!instruments.containsKey(id)) {
             throw new IllegalArgumentException("Ошибка: прибор с id: " + id + " не найден");
         }
     }
@@ -59,17 +59,17 @@ public final class InstrumentsManager {
      * Выполняет валидацию всех полей перед созданием объекта.
      * Если валидация не пройдена — выбрасывает IllegalArgumentException.
      *
-     * @param name название прибора (не пустое, макс. 128 символов)
-     * @param type тип прибора из InstrumentType
+     * @param name            название прибора (не пустое, макс. 128 символов)
+     * @param type            тип прибора из InstrumentType
      * @param inventoryNumber инвентарный номер (можно пустой, макс. 32 символа)
-     * @param location место нахождения (не пустое, макс. 64 символа)
-     * @param status статус прибора (ACTIVE или OUT_OF_SERVICE)
-     * @param ownerUsername логин владельца (не пустой)
+     * @param location        место нахождения (не пустое, макс. 64 символа)
+     * @param status          статус прибора (ACTIVE или OUT_OF_SERVICE)
+     * @param ownerUsername   логин владельца (не пустой)
      * @return ID созданного прибора
      * @throws IllegalArgumentException если поле не прошло валидацию
      * @see ru.itmo.zhmeh.validation.FieldValidator
      */
-    public long addNew(String ownerUsername, String name, String type, String inventoryNumber, String location, String status){
+    public long addNew(String ownerUsername, String name, String type, String inventoryNumber, String location, String status) {
         validateInventoryNumber(inventoryNumber);
 
 
@@ -84,13 +84,13 @@ public final class InstrumentsManager {
         return nextId;
     }
 
-    public Instrument getById(long id){
+    public Instrument getById(long id) {
         checkInstrumentExistsId(id);
         return instruments.get(id);
     }
 
     public List<Instrument> filterInstList(String key, String value) {
-        switch (key){
+        switch (key) {
             case "--type":
                 return instruments.values().stream()
                         .filter(inst -> inst.getType().toString().equalsIgnoreCase(value))
@@ -99,16 +99,16 @@ public final class InstrumentsManager {
                 return instruments.values().stream()
                         .filter(inst -> inst.getStatus().toString().equalsIgnoreCase(value))
                         .collect(Collectors.toList());
-            default: return instruments.values().stream().toList();
+            default:
+                return instruments.values().stream().toList();
         }
-
     }
 
-    public void update(long id, String field, String value){
+    public void update(long id, String field, String value) {
         checkInstrumentExistsId(id);
         Instrument inst = instruments.get(id);
 
-        switch (field){
+        switch (field) {
             case "name":
                 inst.setName(value);
                 break;
@@ -124,21 +124,40 @@ public final class InstrumentsManager {
         }
     }
 
-    public long remove(Long id){
+    public long remove(Long id) {
         checkInstrumentExistsId(id);
         instruments.remove(id);
         return id;
     }
 
-    public List<Instrument> dueInstruments(int days){  //название?
+    public List<Instrument> dueInstruments(int days) {  //название?
         Instant deadline = Instant.now().minus(days, ChronoUnit.DAYS);
         return instruments.values().stream()
                 .filter(inst -> isInstrumentDue(inst, deadline))
                 .collect(Collectors.toList());
     }
 
-    public boolean isInstrumentDue(Instrument instrument, Instant deadline){ //логика для dueInstruments
+    public boolean isInstrumentDue(Instrument instrument, Instant deadline) { //логика для dueInstruments
         return instrument.getLastCalibration() == null || instrument.getLastCalibration().isBefore(deadline) || instrument.getLastCalibration().equals(deadline);
+    }
+
+    public void replaceAll(List<Instrument> loadedList) {
+        instruments.clear(); // очистить всё
+
+        for (Instrument inst : loadedList) { // заполнить новыми
+            instruments.put(inst.getId(), inst);
+        }
+
+        // обновить счётчик ID
+        if (!loadedList.isEmpty()) {
+            long maxLoadedId = loadedList.stream()
+                    .mapToLong(Instrument::getId)
+                    .max()
+                    .orElse(0);
+            this.nextId = maxLoadedId + 1;
+        } else {
+            this.nextId = 1; // Сброс, если загрузили пустой файл
+        }
     }
 
 

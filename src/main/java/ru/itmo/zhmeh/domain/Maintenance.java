@@ -8,10 +8,10 @@ import java.util.Objects;
 
 public final class Maintenance {
     // Уникальный номер записи обслуживания. Программа назначает сама.
-    private final long id;
+    private long id;
     // Какому прибору относится (id прибора).
 // Должен ссылаться на реально существующий Instrument.
-    private final long instrumentId;
+    private long instrumentId;
     // Тип: SERVICE (обслуживание) или REPAIR (ремонт).
     private MaintenanceType type;
     // Что сделали (например "electrode cleaning"). Нельзя пустое. До 128 символов. +
@@ -21,7 +21,7 @@ public final class Maintenance {
     // Кто сделал (логин). На ранних этапах можно "SYSTEM". +
     private String ownerUsername;
     // Когда запись создана. Программа ставит автоматически. +
-    private final Instant createdAt;
+    private Instant createdAt;
 
     public Maintenance(long id, long instrumentId, Instant createdAt) {
         this.id = id;
@@ -39,6 +39,8 @@ public final class Maintenance {
         this.setDoneAt(doneAt);
         this.setOwnerUsername(ownerUsername); //временно иллюзия выбора
     }
+
+    public Maintenance() {}
 
     //getters
     public long getId() {

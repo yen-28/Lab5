@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public final class Instrument {
     // Уникальный номер прибора. Программа назначает сама. -
-    private final long id;
+    private long id;
     // Название прибора (чтобы человек понял, что это). Нельзя пустое. До 128 символов. +
     private String name;
     // Тип прибора (например PH_METER, BALANCE). Выбирается из списка InstrumentType. -
@@ -22,17 +22,18 @@ public final class Instrument {
     // Кто добавил запись (логин). На ранних этапах можно "SYSTEM". +-
     private String ownerUsername;
     // Когда создано. Программа ставит автоматически. +
-    private final Instant createdAt;
+    private Instant createdAt;
     // Когда обновляли. Программа обновляет автоматически. +
     private Instant updatedAt;
 
     private Instant lastCalibration;
 
 
-    private void touch(){
+    private void touch() {
         setUpdatedAt(Instant.now());
         setOwnerUsername("SYSTEM"); // ВРЕМЕННО НА РАННИХ ЭТАПАХ
     }
+
     public Instrument(long id, String ownerUsername, String name, String type, String inventoryNumber, String location, String status) {
         this.id = id; // айди метод!!
         this.createdAt = Instant.now();
@@ -49,6 +50,9 @@ public final class Instrument {
         this.id = id; // айди метод!!
         this.createdAt = Instant.now();
         this.updatedAt = Instant.now();
+    }
+
+    public Instrument() {
     }
 // getters
 

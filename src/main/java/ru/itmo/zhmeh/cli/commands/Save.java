@@ -28,7 +28,7 @@ public final class Save extends Command {
             System.out.println("Данные сохранены в " + path); //
 
         } catch (StorageException e) {
-            System.out.println("Ошибка: " + e.getMessage());
+            System.err.println("Ошибка: " + e.getMessage());
         }
     }
 

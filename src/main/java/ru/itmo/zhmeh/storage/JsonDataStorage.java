@@ -1,5 +1,6 @@
 package ru.itmo.zhmeh.storage;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -15,9 +16,10 @@ public class JsonDataStorage extends AbstractDataStorage { // TODO сделат�
 
     public JsonDataStorage() {
         this.objectMapper = new ObjectMapper();
-        this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         this.objectMapper.registerModule(new JavaTimeModule());
         this.objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);  // Отключаем сериализацию дат как timestamp (будет строка ISO-8601)
+        this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+
 
     }
 
@@ -39,8 +41,13 @@ public class JsonDataStorage extends AbstractDataStorage { // TODO сделат�
                 return new DataContainer();
             }
             return objectMapper.readValue(path.toFile(), DataContainer.class);
+        } catch (JsonProcessingException e) {
+            // Специфичная ошибка парсинга JSON
+            String userMsg = "Файл повреждён или не соответствует формату. " + e.getOriginalMessage();
+            throw new StorageException(userMsg, e);
         } catch (IOException e) {
-            throw new StorageException("Ошибка загрузки: " + path, e);
+            // Ошибка файловой системы
+            throw new StorageException("Нет доступа к файлу или диск переполнен: " + path, e);
         }
     }
 }

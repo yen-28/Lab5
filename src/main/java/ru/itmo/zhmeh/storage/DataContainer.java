@@ -12,8 +12,7 @@ public class DataContainer {
     private List<Calibration> calibrations = new ArrayList<>();
     private List<Maintenance> maintenances = new ArrayList<>();
 
-    public DataContainer() {
-    } //TODO просто для галочки или что-то добавить? - в видео
+    public DataContainer() {} //TODO просто для галочки или что-то добавить? - в видео
 
 
     public List<Instrument> getInstruments() {

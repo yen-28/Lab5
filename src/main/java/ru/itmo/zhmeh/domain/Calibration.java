@@ -8,10 +8,10 @@ import java.util.Objects;
 
 public final class Calibration {
     // Уникальный номер калибровки. Программа назначает сама. +
-    private final long id;
+    private long id;
     // Какому прибору принадлежит (id прибора).
 // Должен ссылаться на реально существующий Instrument.
-    private final long instrumentId;
+    private long instrumentId;
     // Тип калибровки (например ONE_POINT, TWO_POINT). Выбирается из списка CalibrationType. -
     private CalibrationType type;
     // Результат: OK или FAIL. -
@@ -23,7 +23,7 @@ public final class Calibration {
     // Кто делал (логин). На ранних этапах можно "SYSTEM".
     private String ownerUsername;
     // Когда запись создана. Программа ставит автоматически.
-    private final Instant createdAt;
+    private Instant createdAt;
 
 
     public Calibration(long id, String type, long instrumentId, String result, String comment, String calibratedAt, String ownerUsername) {
@@ -36,6 +36,8 @@ public final class Calibration {
         this.setOwnerUsername(ownerUsername);
         this.createdAt = Instant.now();
     }
+
+    public Calibration() {}
 
 // getters
 

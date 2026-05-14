@@ -11,7 +11,7 @@ public final class PathValidator {
      */
     public static Path validateStrPath(String strPath){
         if (strPath == null || strPath.isBlank()) {
-            throw new IllegalArgumentException("Ошибка: укажите путь к файлу. Пример: save <data.json>");
+            throw new IllegalArgumentException("Ошибка: укажите путь к файлу. Пример: save (или load) <data.json>");
         }
 
 
