@@ -15,7 +15,8 @@ public final class PathValidator {
         }
 
 
-        Path path = Path.of(strPath.substring(1, strPath.length() - 1)); // +обрезали
+        Path path = Path.of(strPath.trim());
+        //Path path = Path.of(strPath.substring(1, strPath.length() - 1)); // +обрезали - TODO было раньше ( <>)
 
         // Проверка расширения (регистронезависимая)
         String fileName = path.getFileName().toString();

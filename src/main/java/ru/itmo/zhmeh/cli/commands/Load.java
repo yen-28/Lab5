@@ -26,7 +26,7 @@ public final class Load extends Command{
 
             environment.getInstrumentsManager().replaceAll(container.getInstruments());
             environment.getCalibrationManager().replaceAll(container.getCalibrations());
-            environment.getCalibrationManager().replaceAll(container.getCalibrations());
+            environment.getMaintenanceManager().replaceAll(container.getMaintenances());
 
             System.out.println("OK данные загружены из " + path);
 

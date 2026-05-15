@@ -46,7 +46,7 @@ public final class FieldValidator {
     public static Instant parseInstant(String instant){
 
         try {
-            return Instant.parse(instant);
+            return Instant.parse(instant); // для JSON
         } catch (DateTimeException ignored) {
 
         }
