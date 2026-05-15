@@ -44,6 +44,9 @@ public class Main {
             System.out.println("Файл " + defaultPath + " не найден. Запуск с пустой базы");
         }
 
+        System.out.println("ДОБРО ПОЖАЛОВАТЬ! МЫ РАДЫ ВАС ВИДЕТЬ \n" +
+                "Введите команду или 'help' (ПОМОГИТЕ!) \n ");
+
         while (true) {
             String input = scanner.nextLine().trim();
 
@@ -62,6 +65,8 @@ public class Main {
                 } else {
                     System.err.println("Command not found");
                 }
+
+                System.out.println();
                 //TODO сделать ввод и использование команд
 
             } catch (Exception e) {
