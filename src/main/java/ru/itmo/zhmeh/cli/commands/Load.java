@@ -2,6 +2,7 @@ package ru.itmo.zhmeh.cli.commands;
 
 import ru.itmo.zhmeh.cli.Environment;
 import ru.itmo.zhmeh.storage.DataContainer;
+import ru.itmo.zhmeh.storage.DataLoader;
 import ru.itmo.zhmeh.storage.StorageException;
 import ru.itmo.zhmeh.validation.FileValidationException;
 import ru.itmo.zhmeh.validation.FileValidator;
@@ -20,14 +21,7 @@ public final class Load extends Command{
 
         try {
 
-            DataContainer container = environment.getDataStorage().load(path); // временный контейнер
-
-            new FileValidator().validate(container); // валидация
-
-            environment.getInstrumentsManager().replaceAll(container.getInstruments());
-            environment.getCalibrationManager().replaceAll(container.getCalibrations());
-            environment.getMaintenanceManager().replaceAll(container.getMaintenances());
-
+            DataLoader.loadData(path, environment);
             System.out.println("OK данные загружены из " + path);
 
         } catch (StorageException e) {
