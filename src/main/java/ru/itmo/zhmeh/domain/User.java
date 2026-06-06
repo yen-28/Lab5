@@ -15,6 +15,10 @@ public final class User {
         this.passwordHash = hashPassword(password);
     }
 
+    public static User fromDatabase(long id, String login, String passwordHash) {
+        return new User(id, login, passwordHash);
+    }
+
     // Хеширование пароля
     private static String hashPassword(String password) {
         try {
@@ -33,4 +37,6 @@ public final class User {
     public long getId() { return id; }
 
     public String getLogin() { return login; }
+
+    public String getPasswordHash() { return passwordHash; }
 }
