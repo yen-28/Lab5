@@ -41,3 +41,9 @@ build/
 
 # Файлы конфигурации с паролями
 src/main/resources/config.properties
+
+
+
+/d.json
+/dependency-reduced-pom.xml
+/lab.json

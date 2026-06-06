@@ -1,11 +1,8 @@
 package ru.itmo.zhmeh.cli.commands;
 
 import ru.itmo.zhmeh.cli.Environment;
-import ru.itmo.zhmeh.storage.DataContainer;
-import ru.itmo.zhmeh.storage.DataLoader;
-import ru.itmo.zhmeh.storage.StorageException;
+import ru.itmo.zhmeh.storage.DatabaseException;
 import ru.itmo.zhmeh.validation.FileValidationException;
-import ru.itmo.zhmeh.validation.FileValidator;
 import ru.itmo.zhmeh.validation.PathValidator;
 
 import java.nio.file.Path;
@@ -19,16 +16,16 @@ public final class Load extends Command{
 
         Path path = PathValidator.validateStrPath(args);
 
-        try {
-
-            DataLoader.loadData(path, environment);
-            System.out.println("OK данные загружены из " + path);
-
-        } catch (StorageException e) {
-            System.err.println("Ошибка чтения файла: " + e.getMessage());
-        } catch (FileValidationException e) {
-            System.err.println("Ошибка валидации данных: " + e.getMessage());
-        }
+//        try {
+//
+//            //DataLoader.loadData(path, environment);
+//            System.out.println("OK данные загружены из " + path);
+//
+//        } catch (DatabaseException e) {
+//            System.err.println("Ошибка чтения файла: " + e.getMessage());
+//        } catch (FileValidationException e) {
+//            System.err.println("Ошибка валидации данных: " + e.getMessage());
+//        }
 
 
     }

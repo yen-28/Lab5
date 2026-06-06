@@ -10,9 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import ru.itmo.zhmeh.domain.*;
 import ru.itmo.zhmeh.service.*;
-import ru.itmo.zhmeh.storage.DataContainer;
-import ru.itmo.zhmeh.storage.JsonDataStorage;
-import ru.itmo.zhmeh.storage.StorageException;
+import ru.itmo.zhmeh.storage.DatabaseException;
 import ru.itmo.zhmeh.ui.dialogs.AddCalibrationDialog;
 import ru.itmo.zhmeh.ui.dialogs.AddInstrumentDialog;
 import ru.itmo.zhmeh.ui.dialogs.AddMaintenanceDialog;
@@ -184,33 +182,33 @@ public class MainWindowController {
         );
 
         if (selectedFile != null) {
-            try {
-                // Загружаем через storage
-                JsonDataStorage storage = new JsonDataStorage();
-                DataContainer container = storage.load(selectedFile.toPath());
-
-                // Валидируем
-                new FileValidator().validate(container);
-
-                // Атомарно заменяем данные в менеджерах
-                instrumentsManager.replaceAll(container.getInstruments());
-                calibrationManager.replaceAll(container.getCalibrations());
-                maintenanceManager.replaceAll(container.getMaintenances());
-
-                // Обновляем все таблицы
-                loadInstruments();
-                loadCalibrations();
-                loadMaintenances();
-
-                new Alert(Alert.AlertType.INFORMATION, "✅ Данные загружены из " + selectedFile.getName()).show();
-
-            } catch (ru.itmo.zhmeh.storage.StorageException e) {
-                showError("Ошибка чтения файла: " + e.getMessage());
-            } catch (ru.itmo.zhmeh.validation.FileValidationException e) {
-                showError("Ошибка валидации: " + e.getMessage());
-            } catch (Exception e) {
-                showError("Неизвестная ошибка: " + e.getMessage());
-            }
+//            try {
+//                // Загружаем через storage
+////                JsonDataStorage storage = new JsonDataStorage();
+////                DataContainer container = storage.load(selectedFile.toPath());
+//
+////                // Валидируем
+////                new FileValidator().validate(container);
+////
+////                // Атомарно заменяем данные в менеджерах
+////                instrumentsManager.replaceAll(container.getInstruments());
+////                calibrationManager.replaceAll(container.getCalibrations());
+////                maintenanceManager.replaceAll(container.getMaintenances());
+//
+//                // Обновляем все таблицы
+//                loadInstruments();
+//                loadCalibrations();
+//                loadMaintenances();
+//
+//                new Alert(Alert.AlertType.INFORMATION, "✅ Данные загружены из " + selectedFile.getName()).show();
+//
+//            } catch (DatabaseException e) {
+//                showError("Ошибка чтения файла: " + e.getMessage());
+//            } catch (ru.itmo.zhmeh.validation.FileValidationException e) {
+//                showError("Ошибка валидации: " + e.getMessage());
+//            } catch (Exception e) {
+//                showError("Неизвестная ошибка: " + e.getMessage());
+//            }
         }
     }
 
@@ -312,28 +310,27 @@ public class MainWindowController {
             return;
         }
 
-        try {
-            DataContainer container = new DataContainer();
-
-            // независимая копия
-            container.setInstruments(new ArrayList<>(instrumentsManager.getColInstruments()));
-            container.setCalibrations(new ArrayList<>(calibrationManager.getColCalibrations()));
-            container.setMaintenances(new ArrayList<>(maintenanceManager.getColMaintenance()));
-
-            // слой хранения для записи на диск
-            JsonDataStorage storage = new JsonDataStorage();
-            storage.save(container, selectedFile.toPath());
-
-            // успех
-            Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "Данные успешно сохранены в " + selectedFile.getName());
-            successAlert.showAndWait();
-
-        } catch (StorageException e) {
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Ошибка сохранения: " + e.getMessage());
-            errorAlert.showAndWait();
-        } catch (Exception e) {
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Неизвестная ошибка при сохранении: " + e.getMessage());
-            errorAlert.showAndWait();
+//        try {
+//            DataContainer container = new DataContainer();
+//
+//            // независимая копия
+//            container.setInstruments(new ArrayList<>(instrumentsManager.getColInstruments()));
+//            container.setCalibrations(new ArrayList<>(calibrationManager.getColCalibrations()));
+//            container.setMaintenances(new ArrayList<>(maintenanceManager.getColMaintenance()));
+//
+//            // слой хранения для записи на диск
+//            JsonDataStorage storage = new JsonDataStorage();
+//            storage.save(container, selectedFile.toPath());
+//
+//            // успех
+//            Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "Данные успешно сохранены в " + selectedFile.getName());
+//            successAlert.showAndWait();
+//
+//        } catch (DatabaseException e) {
+//            Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Ошибка сохранения: " + e.getMessage());
+//            errorAlert.showAndWait();
+//        } catch (Exception e) {
+//            Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Неизвестная ошибка при сохранении: " + e.getMessage());
+//            errorAlert.showAndWait();
         }
     }
-}

@@ -1,13 +1,11 @@
 package ru.itmo.zhmeh.cli.commands;
 
 import ru.itmo.zhmeh.cli.Environment;
-import ru.itmo.zhmeh.storage.DataContainer;
-import ru.itmo.zhmeh.storage.StorageException;
+import ru.itmo.zhmeh.storage.DatabaseException;
 import ru.itmo.zhmeh.validation.PathValidator;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public final class Save extends Command {
     private static final String name = "save";
@@ -17,19 +15,19 @@ public final class Save extends Command {
 
         Path path = PathValidator.validateStrPath(args);
 
-        try {
-
-            DataContainer container = new DataContainer();
-            container.setInstruments(new ArrayList<>(environment.getInstrumentsManager().getColInstruments())); // Collection??
-            container.setCalibrations(new ArrayList<>(environment.getCalibrationManager().getColCalibrations()));
-            container.setMaintenances(new ArrayList<>(environment.getMaintenanceManager().getColMaintenance()));
-
-            environment.getDataStorage().save(container, path);
-            System.out.println("Данные сохранены в " + path); //
-
-        } catch (StorageException e) {
-            System.err.println("Ошибка: " + e.getMessage());
-        }
+//        try {
+//
+////            DataContainer container = new DataContainer();
+////            container.setInstruments(new ArrayList<>(environment.getInstrumentsManager().getColInstruments())); // Collection??
+////            container.setCalibrations(new ArrayList<>(environment.getCalibrationManager().getColCalibrations()));
+////            container.setMaintenances(new ArrayList<>(environment.getMaintenanceManager().getColMaintenance()));
+//
+////            environment.getDataStorage().save(container, path);
+////            System.out.println("Данные сохранены в " + path); //
+//
+//        } catch (DatabaseException e) {
+//            System.err.println("Ошибка: " + e.getMessage());
+//        }
     }
 
     public static String getName() {

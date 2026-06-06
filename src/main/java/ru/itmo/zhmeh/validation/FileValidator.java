@@ -1,7 +1,6 @@
 package ru.itmo.zhmeh.validation;
 
 import ru.itmo.zhmeh.domain.*;
-import ru.itmo.zhmeh.storage.DataContainer;
 
 import java.util.HashSet;
 import java.util.List;
@@ -18,16 +17,16 @@ public class FileValidator {
      * @param container загруженные данные
      * @throws FileValidationException если данные невалидны
      */
-    public void validate(DataContainer container) throws FileValidationException {
-
-        // проверка сущностей и их полей
-        validateInstruments(container.getInstruments());
-        validateCalibrations(container.getCalibrations());
-        validateMaintenences(container.getMaintenances());
-
-        // проверка ссылочной целостности
-        checkReferentialIntegrity(container);
-    }
+//    public void validate(DataContainer container) throws FileValidationException {
+//
+//        // проверка сущностей и их полей
+//        validateInstruments(container.getInstruments());
+//        validateCalibrations(container.getCalibrations());
+//        validateMaintenences(container.getMaintenances());
+//
+//        // проверка ссылочной целостности
+//        checkReferentialIntegrity(container);
+//    }
 
     /**
      * Проверить приборы на дубликаты и корректность полей.
@@ -113,31 +112,31 @@ public class FileValidator {
     /**
      * Проверить ссылочную целостность между сущностями
      *
-     * @param container
+     * //@param container
      * @throws FileValidationException
      */
 
-    private void checkReferentialIntegrity(DataContainer container) throws FileValidationException {
+    private void checkReferentialIntegrity() throws FileValidationException {
 
         Set<Long> instrumentIDs = new HashSet<>();
 
-        for (Instrument inst : container.getInstruments()) {
-            instrumentIDs.add(inst.getId());
-        }
-
-        // Проверить, что все калибровки ссылаются на существующие приборы
-        for (Calibration cal : container.getCalibrations()) {
-            if (!instrumentIDs.contains(cal.getInstrumentId())) {
-                throw new FileValidationException("Калибровка id = " + cal.getId() + " ссылается на несуществующий прибор id=" + cal.getInstrumentId());
+//        for (Instrument inst : container.getInstruments()) {
+//            instrumentIDs.add(inst.getId());
+//        }
+//
+//        // Проверить, что все калибровки ссылаются на существующие приборы
+//        for (Calibration cal : container.getCalibrations()) {
+//            if (!instrumentIDs.contains(cal.getInstrumentId())) {
+//                throw new FileValidationException("Калибровка id = " + cal.getId() + " ссылается на несуществующий прибор id=" + cal.getInstrumentId());
+//            }
+//        }
+//
+//        // Проверить, что все обслуживания ссылаются на существующие приборы
+//        for (Maintenance maint : container.getMaintenances()) {
+//            if (!instrumentIDs.contains(maint.getInstrumentId())) {
+//                throw new FileValidationException("Обслуживание id=" + maint.getId() + " ссылается на несуществующий прибор id=" + maint.getInstrumentId()
+//                );
             }
         }
-
-        // Проверить, что все обслуживания ссылаются на существующие приборы
-        for (Maintenance maint : container.getMaintenances()) {
-            if (!instrumentIDs.contains(maint.getInstrumentId())) {
-                throw new FileValidationException("Обслуживание id=" + maint.getId() + " ссылается на несуществующий прибор id=" + maint.getInstrumentId()
-                );
-            }
-        }
-    }
-}
+//    }
+//}
